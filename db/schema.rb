@@ -11,10 +11,12 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130612220930) do
+ActiveRecord::Schema.define(:version => 20130612231539) do
 
   create_table "users", :force => true do |t|
     t.string "email"
+    t.string "first_name"
+    t.string "last_name"
   end
 
 end

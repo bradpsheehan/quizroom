@@ -4,6 +4,8 @@ describe "Instructor signup" do
   it "successfully signs up" do
     visit root_path
     click_link "signup"
+    fill_in 'user_first_name', :with => "joe"
+    fill_in 'user_last_name', :with => "smith"
     fill_in 'user_email', :with => "abc@example.com"
     fill_in 'user_password', :with => "password"
     fill_in 'user_password_confirmation', :with => "password"
