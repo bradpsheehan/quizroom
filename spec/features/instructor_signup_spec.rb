@@ -10,7 +10,7 @@ describe "Instructor signup" do
     fill_in 'user_password', :with => "password"
     fill_in 'user_password_confirmation', :with => "password"
     click_button 'Create User'
-    expect( page ).to have_content 'Signed In!'
+    expect( page ).to have_content 'Signup Successful!'
     # expect( current_path ).to eq user_path(user)
     expect( page ).to have_link 'create classroom'
   end

@@ -9,7 +9,7 @@ class UsersController < ApplicationController
     password = user_attributes.delete(:password)
     password_confirmation = user_attributes.delete(:password_confirmation)
     @user = User.create(user_attributes)
-    flash[:notice] = "Signed In!"
+    flash[:notice] = "Signup Successful!"
     redirect_to @user
   end
 
