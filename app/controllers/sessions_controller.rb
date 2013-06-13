@@ -10,6 +10,7 @@ class SessionsController < ApplicationController
       redirect_to user
     else
       flash.now.alert = "Email or passowrd was invalid."
+      redirect_to login_path
     end
   end
 
