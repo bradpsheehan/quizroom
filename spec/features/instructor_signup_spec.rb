@@ -12,7 +12,7 @@ describe "Instructor signup" do
     click_button 'Create User'
     expect( page ).to have_content 'Signup Successful!'
     # expect( current_path ).to eq user_path(user)
-    expect( page ).to have_link 'create classroom'
+    expect( page ).to have_link 'New Classroom'
   end
 end
 

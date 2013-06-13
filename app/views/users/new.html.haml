@@ -1,9 +1,18 @@
-=form_for @user do |f|
-  =f.text_field :first_name
-  =f.text_field :last_name
-  =f.email_field :email
-  =f.password_field :password
-  =f.password_field :password_confirmation
-  =f.submit
+.row
+  .large-11.columns
+    %h1
+      Sign Up for QuizRoom
+    =form_for @user do |f|
+      =f.label 'First Name'
+      =f.text_field :first_name
+      =f.label 'Last Name'
+      =f.text_field :last_name
+      =f.label 'Email'
+      =f.email_field :email
+      =f.label 'Password'
+      =f.password_field :password
+      =f.label 'Password Confirmation'
+      =f.password_field :password_confirmation
+      =f.submit
 
 
