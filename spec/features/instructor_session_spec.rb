@@ -14,7 +14,7 @@ describe "Instructor login and logout" do
     click_button 'login'
     expect( page ).to have_content 'Logged In!'
     # expect( current_path ).to eq user_path(user)
-    expect( page ).to have_link 'create classroom'
+    expect( page ).to have_link 'New Classroom'
 
     click_link "logout"
     expect(page).to have_content 'Logged Out!'

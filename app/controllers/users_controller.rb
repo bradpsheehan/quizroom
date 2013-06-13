@@ -8,8 +8,13 @@ class UsersController < ApplicationController
     user_attributes = params[:user]
     @user = User.create_with_password(user_attributes)
 
-    flash[:notice] = "Signup Successful!"
-    redirect_to @user
+    if @user.valid?
+      flash[:notice] = "Signup Successful!"
+      redirect_to @user
+    else
+      flash[:notice] = "Invalid information"
+      redirect_to signup_path
+    end
   end
 
   def show

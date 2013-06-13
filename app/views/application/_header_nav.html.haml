@@ -1,0 +1,19 @@
+%nav.top-bar
+  %ul.title-area
+    %li.name
+      %h1
+        =link_to 'QuizRoom', root_path
+    %li.toggle-topbar.menu-icon
+      %a{:href => "#"}
+        %span Menu
+  %section.top-bar-section
+    %ul.right
+      %li.divider
+        %li
+          =link_to 'signup', signup_path
+        %li.divider
+        %li
+          -if current_user
+            =link_to 'logout', logout_path
+          -else
+            =link_to 'login', login_path
