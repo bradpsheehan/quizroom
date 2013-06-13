@@ -6,9 +6,8 @@ class UsersController < ApplicationController
 
   def create
     user_attributes = params[:user]
-    password = user_attributes.delete(:password)
-    password_confirmation = user_attributes.delete(:password_confirmation)
-    @user = User.create(user_attributes)
+    @user = User.create_with_password(user_attributes)
+
     flash[:notice] = "Signup Successful!"
     redirect_to @user
   end
