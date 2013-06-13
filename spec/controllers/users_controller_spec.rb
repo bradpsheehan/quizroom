@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe UsersController do
   describe "#create" do
-    context "valid user" do
+    context "valid user info" do
       it "creates a user" do
          expected_attrs = {
           "first_name" => "joe",
@@ -24,13 +24,9 @@ describe UsersController do
         post :create, user: user_attributes
       end
 
-      it "sets the password" do
-      end
-      
-      it "directs them to the user's page"
     end
 
-    context "invalid user" do
+    context "invalid user info" do
       it "directs them to the signup page"
     end
   end
