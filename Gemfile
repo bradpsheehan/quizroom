@@ -1,13 +1,11 @@
 source 'https://rubygems.org'
 
 gem 'rails', '3.2.13'
-
-# Bundle edge Rails instead:
-# gem 'rails', :git => 'git://github.com/rails/rails.git'
-
 gem 'pg'
 gem 'haml'
 gem 'sorcery'
+gem 'faye', '~> 0.8.9'
+gem 'thin'
 
 group :test do
   gem 'rspec-rails'
