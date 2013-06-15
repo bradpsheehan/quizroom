@@ -3,10 +3,6 @@
     %ul#chat
       = render @messages
 
-    / = form_tag messages_path, :method => :post, :remote => true do
-    /   = text_field_tag :text, params[:message]
-    /   = submit_tag "Send"
-
     = form_for Message.new, url: messages_path, :method => :post, :remote => true do |f|
       = f.text_field :text
       = f.submit "Send"

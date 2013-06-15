@@ -6,7 +6,7 @@ class ClassroomsController < ApplicationController
 
   def show
     # @messages = Message.where(classroom_id: params[:id])
-    @messages = Message.find(1)
+    @messages = Message.all
   end
 
   def create
