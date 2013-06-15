@@ -4,6 +4,7 @@ Quizroom::Application.routes.draw do
   resources :users
   resources :sessions
   resources :classrooms
+  resources :messages, only: [:create]
 
   get 'signup' => 'users#new'
   get 'login' => 'sessions#new', as: 'login'
