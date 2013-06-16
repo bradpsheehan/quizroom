@@ -11,11 +11,11 @@ class Classroom
     classroom = objectify(response)
   end
 
-  private
+private
 
   def self.connect
     Faraday.new(:url => 'http://localhost:3000') do |faraday|
-      faraday.response :logger
+      # faraday.response :logger
       faraday.adapter  Faraday.default_adapter
     end
   end
