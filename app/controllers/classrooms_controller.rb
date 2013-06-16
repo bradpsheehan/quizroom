@@ -10,8 +10,11 @@ class ClassroomsController < ApplicationController
   end
 
   def create
-    # classroom = Classroom.create
-    # API.new.create_classroom(params[:classroom])
-    redirect_to classroom_path(1)
+    @classroom = Classroom.create(current_user.id, params[:class_name])
+    if @classroom
+      redirect_to classroom_path(@classroom.id)
+    else
+      redirect_to new_classroom_path, notice: "There was a problem creating the clasroom."
+    end
   end
 end

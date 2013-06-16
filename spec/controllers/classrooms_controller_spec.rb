@@ -6,25 +6,26 @@ describe ClassroomsController do
 
     context "given valid parameters" do
 
-      xit "sends JSON to classroom service" do
-        params = {name: "English 101", teacher_id: 1}
-        controller.stub(:response).and_return({name: "English 101", id: 1})
-        post :create, :classroom => params
+      it "sends JSON to classroom service" do
+        classroom = Classroom.create(1, "English 101")
+        controller.stub_chain(:current_user, :id).and_return(1)
+        Classroom.stub(:create).with(1, "English 101").and_return(classroom)
 
-        expect(json_response[:name]).to eq("English 101")
-        expect(json_response.status).to eq 200
+        post :create, class_name: "English 101"
+        expect(assigns(:classroom)).to eq classroom
+
       end
     end
 
     context "given invalid parameters" do
 
-      xit "sends JSON without a classroom name to classroom service" do
-        params = {name: "", teacher_id: 1}
-        response.stub(:body).with({errors: {name: ["can't be blank"]}}.to_json)
-        post :create, classroom: params
-        json_response = JSON.parse(response.body).with_indifferent_access
+      it "sends JSON without a classroom name to classroom service" do
+        controller.stub_chain(:current_user, :id).and_return(1)
+        Classroom.stub(:create).with(1, "")
 
-        expect(json_response[:errors]).to eq({"name"=>["can't be blank"]})
+        post :create, class_name: ""
+        expect(assigns(:classroom)).to eq nil
+
       end
     end
   end
