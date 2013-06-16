@@ -22,10 +22,14 @@ class Classroom
 
   def self.objectify response
     data = JSON.parse(response.body)
-    OpenStruct.new(
-                   :name => data["name"],
-                   :teacher_id => data["teacher_id"],
-                   :id => data["id"]
-                  )
+    if data["errors"]
+      nil
+    else
+      OpenStruct.new(
+                     :name => data["name"],
+                     :teacher_id => data["teacher_id"],
+                     :id => data["id"]
+                    )
+    end
   end
 end
