@@ -16,6 +16,8 @@ group :test do
   gem 'launchy'
   gem 'capybara'
   gem 'simplecov', :require => false, :group => :test
+  gem 'vcr', '~> 2.5.0'
+  gem 'fakeweb', '~> 1.3.0'
 end
 
 group :development do
