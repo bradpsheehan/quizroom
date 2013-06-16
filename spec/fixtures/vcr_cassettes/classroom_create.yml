@@ -1,0 +1,53 @@
+---
+http_interactions:
+- request:
+    method: post
+    uri: http://localhost:3000/teachers/1/classrooms
+    body:
+      encoding: UTF-8
+      string: '{"name":"bro blair 101","teacher_id":"1"}'
+    headers:
+      user-agent:
+      - Faraday v0.8.7
+      content-type:
+      - application/json
+      accept-encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      accept:
+      - '*/*'
+  response:
+    status:
+      code: 201
+      message: 'Created '
+    headers:
+      location:
+      - http://localhost:3000/teachers/1/classrooms/12
+      content-type:
+      - application/json; charset=utf-8
+      x-ua-compatible:
+      - IE=Edge
+      etag:
+      - '"cfdd83cf9ea97c7c87df5e1f9cd4662d"'
+      cache-control:
+      - max-age=0, private, must-revalidate
+      x-request-id:
+      - b306a13e0d838eddf728623d0d375d8b
+      x-runtime:
+      - '0.008825'
+      server:
+      - WEBrick/1.3.1 (Ruby/2.0.0/2013-05-14)
+      date:
+      - Sun, 16 Jun 2013 19:00:56 GMT
+      content-length:
+      - '47'
+      connection:
+      - close
+      set-cookie:
+      - _classroomapp_session=BAh7BkkiD3Nlc3Npb25faWQGOgZFVEkiJTBjZDllOTc0ZWFkYWRlNTljYzNkYjQyM2UwYmExNWYyBjsAVA%3D%3D--5e139a08efd1856ae4cfe9b21d37d5986214718c;
+        path=/; HttpOnly
+    body:
+      encoding: UTF-8
+      string: '{"id":12,"name":"bro blair 101","teacher_id":1}'
+    http_version: '1.1'
+  recorded_at: Sun, 16 Jun 2013 19:00:56 GMT
+recorded_with: VCR 2.5.0
