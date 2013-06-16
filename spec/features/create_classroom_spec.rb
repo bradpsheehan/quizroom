@@ -7,10 +7,16 @@ describe "creates a classroom" do
     u.password_confirmation = "password"
     u.save!
 
+
+
+    login_user_post(u.email, "password")
+
     visit new_classroom_path
     fill_in 'class_name', :with => "English"
     click_button 'create'
 
     expect(current_path).to eq classroom_path(current_classroom)
   end
+
+  it "doesnt let an unauthenticated visitor create a classroom"
 end
