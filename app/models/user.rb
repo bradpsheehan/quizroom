@@ -1,6 +1,6 @@
 class User < ActiveRecord::Base
   authenticates_with_sorcery!
-  attr_accessible :first_name, :last_name, :email
+  attr_accessible :first_name, :last_name, :email, :teacher
   validates_confirmation_of :password, :message => "should match confirmation", :if => :password
 
   def self.create_with_password(user_attributes)

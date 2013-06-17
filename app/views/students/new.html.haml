@@ -1,0 +1,7 @@
+= form_tag classroom_students_path(@classroom.id) do
+  .field
+    = hidden_field_tag :classroom_id, @classroom.id
+    = label_tag :students
+    = text_area_tag :students
+  .actions
+    = submit_tag "Add Students"

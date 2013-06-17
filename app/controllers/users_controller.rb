@@ -10,6 +10,7 @@ class UsersController < ApplicationController
 
     if @user.valid?
       flash[:notice] = "Signup Successful!"
+      auto_login(@user)
       redirect_to @user
     else
       flash[:notice] = "Invalid information"

@@ -1,5 +1,8 @@
 class ClassroomsController < ApplicationController
 
+  before_filter :require_login
+  before_filter :is_teacher, only: [:new, :create]
+
   def new
   end
 
@@ -14,6 +17,12 @@ class ClassroomsController < ApplicationController
     else
       redirect_to new_classroom_path, notice: "There was a problem creating the clasroom."
     end
+  end
+
+  private
+
+  def is_teacher
+
   end
 
 end

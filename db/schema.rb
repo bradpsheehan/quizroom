@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130612233649) do
+ActiveRecord::Schema.define(:version => 20130617004454) do
 
   create_table "users", :force => true do |t|
     t.string   "email"
@@ -21,6 +21,7 @@ ActiveRecord::Schema.define(:version => 20130612233649) do
     t.string   "salt"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.boolean  "teacher",          :default => false
   end
 
 end
