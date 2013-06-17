@@ -1,11 +1,10 @@
 class ClassroomsController < ApplicationController
 
   def new
-
   end
 
   def show
-
+    @classroom = Classroom.find(current_user.id, params[:id])
   end
 
   def create
