@@ -5,6 +5,14 @@ class StudentsController < ApplicationController
   end
 
   def create
-
+    @students = User.find_or_create params[:students]
+    if @students
+      fail
+      redirect_to new_classroom_student_path(params[:classroom_id]),
+      notice: "Students successfully created."
+    else
+      redirect_to new_classroom_student_path(params[:classroom_id]),
+      notice: "Something went wrong while creating students"
+    end
   end
 end

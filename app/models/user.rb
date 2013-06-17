@@ -13,4 +13,14 @@ class User < ActiveRecord::Base
     user
   end
 
+  def self.find_or_create_students(student_emails)
+    emails = student_emails.split(", ")
+    emails -= self.pluck(:email)
+    emails.each do |email|
+      user = User.new(email: email)
+      user.password = email.split("@")[0]
+      user.password_confirmation = user.password
+      user.save
+    end
+  end
 end

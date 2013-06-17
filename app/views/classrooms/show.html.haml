@@ -2,4 +2,4 @@
   .large-11.columns
     %h1
       = @classroom.name
-    = link_to "Add Students", add_students_path
+    = link_to "Add Students", new_classroom_student_path(@classroom.id)

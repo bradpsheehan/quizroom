@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 describe "Instructor login and logout" do
-  it "successfully logs in and logs out" do
+  xit "successfully logs in and logs out" do
     u = User.new(first_name: "joe", last_name:"smith", email: "abc@example.com")
     u.password = "password"
     u.password_confirmation = "password"

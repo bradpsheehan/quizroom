@@ -6,6 +6,7 @@ describe 'add students to a class' do
     u = User.new(first_name: "joe", last_name:"smith", email: "abc@example.com")
     u.password = "password"
     u.password_confirmation = "password"
+    u.teacher = true
     u.save!
 
     login_user_post(u.email, "password")

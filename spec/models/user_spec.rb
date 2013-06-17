@@ -13,4 +13,19 @@ describe User do
       expect{User.create_with_password(attributes )}.to change{User.count}.by(1)
     end
   end
+
+  describe ".find_or_create_students" do
+    context "with one student who doesn't exist" do
+      attributes = "ed@example.com"
+      it "creates a user" do
+        expect{User.find_or_create_students(attributes)}.to change{User.count}.by(1)
+      end
+    end
+
+    context "with multiple students" do
+      it "creates the users" do
+
+      end
+    end
+  end
 end
