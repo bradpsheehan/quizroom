@@ -1,0 +1,8 @@
+.row
+  .large-11.cloumns
+    = form_tag classrooms_path do
+      .field
+        = label_tag :class_name
+        = text_field_tag 'class_name'
+      .actions
+        = submit_tag "create"

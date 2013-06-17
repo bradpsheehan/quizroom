@@ -5,10 +5,16 @@ class UsersController < ApplicationController
   end
 
   def create
+    user_attributes = params[:user]
+    @user = User.create_with_password(user_attributes)
 
-    @user = User.create
-    flash[:notice] = "Signed In!"
-    redirect_to @user
+    if @user.valid?
+      flash[:notice] = "Signup Successful!"
+      redirect_to @user
+    else
+      flash[:notice] = "Invalid information"
+      redirect_to signup_path
+    end
   end
 
   def show
