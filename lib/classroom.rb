@@ -1,5 +1,10 @@
 class Classroom
 
+  def self.find(teacher_id, id)
+    data = connect.get "/teachers/#{teacher_id}/classrooms/#{id}"
+    classroom = objectify(data)
+  end
+
   def self.create(teacher_id, name)
     conn = connect
 
