@@ -18,6 +18,7 @@ group :test do
   gem 'simplecov', :require => false, :group => :test
   gem 'vcr', '~> 2.5.0'
   gem 'fakeweb', '~> 1.3.0'
+  gem 'selenium-webdriver'
 end
 
 group :development do

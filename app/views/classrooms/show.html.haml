@@ -3,3 +3,4 @@
     %h1
       = @classroom.name
     = link_to "Add Students", add_students_path
+    = button_to "start quiz", start_quiz_path(classroom_id: @classroom.id)
