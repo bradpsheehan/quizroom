@@ -33,22 +33,7 @@ describe ClassroomsController do
     end
   end
 
-  describe "#show" do
+  describe "#show"
 
-    context "given a classroom id" do
-
-      xit "assigns all messages for that classroom to @messages" do
-        classroom_object = OpenStruct.new(
-                                         :name => "blair's kale",
-                                         :teacher_id => 1,
-                                         :id => 2
-                                        )
-        # message = Message.create(text: "brooooooo dude")
-        classroom = Classroom.stub(:create).and_return(classroom_object)
-
-        get :show
-      end
-    end
-  end
 
 end

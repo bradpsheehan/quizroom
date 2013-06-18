@@ -4,7 +4,7 @@ describe Classroom do
 
   describe ".create" do
     context "valid input" do
-      xit "creates a Classroom" do
+      it "creates a Classroom" do
         VCR.use_cassette('classroom create') do
           classroom = Classroom.create(1, "bro blair 102")
 

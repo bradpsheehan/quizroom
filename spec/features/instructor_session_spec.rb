@@ -1,10 +1,11 @@
 require 'spec_helper'
 
 describe "Instructor login and logout" do
-  xit "successfully logs in and logs out" do
+  it "successfully logs in and logs out" do
     u = User.new(first_name: "joe", last_name:"smith", email: "abc@example.com")
     u.password = "password"
     u.password_confirmation = "password"
+    u.teacher = true
     u.save!
 
     visit root_path
