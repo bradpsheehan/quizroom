@@ -30,7 +30,7 @@ describe User do
       end
     end
 
-    context "with one student who already exists in the db" do
+    context "with a student who already exists in the db" do
       before do
         student = User.new(email: "blair@kale.com")
         student.password = "password"
@@ -38,10 +38,19 @@ describe User do
         student.save
       end
 
-      it "does not create a new student" do
-        attributes = "blair@kale.com"
-        user = User.find_or_create_students(attributes)
-        expect{user}.to_not change{User.count}.by(1)
+      context "with one student who already exists" do
+        it "does not create a new student" do
+          attributes = "blair@kale.com"
+          user = User.find_or_create_students(attributes)
+          expect{user}.to_not change{User.count}.by(1)
+        end
+      end
+
+      context "with multiple students, one of whom already exists" do
+        it "creates only the new students" do
+          attributes = "blair@kale.com, danny@meat.com"
+          expect{User.find_or_create_students(attributes)}.to change{User.count}.by(1)
+        end
       end
     end
   end
