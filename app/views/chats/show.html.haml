@@ -7,5 +7,5 @@
         = text_area_tag :message
         = submit_tag "post", {id: "chat-submit"}
 
-= javascript_include_tag "http://localhost:9292/faye.js"
-= javascript_include_tag "faye_client.js"
+
+= render 'web_socket.js'
