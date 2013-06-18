@@ -13,8 +13,10 @@ class ClassroomsController < ApplicationController
   def create
     @classroom = Classroom.create(current_user.id, params[:class_name])
     if @classroom
+    binding.pry
       redirect_to classroom_path(@classroom.id)
     else
+      binding.pry
       redirect_to new_classroom_path, notice: "There was a problem creating the clasroom."
     end
   end
@@ -23,6 +25,7 @@ class ClassroomsController < ApplicationController
 
   def is_teacher
     redirect_to root_path unless current_user.teacher
+    current_user.teacher
   end
 
 end
