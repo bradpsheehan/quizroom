@@ -3,7 +3,7 @@ $(document).ready( function() {
 
   faye.subscribe("/messages/new", function(data) {
     console.log(data);
-    $("#chat").append("<li>"+data.message+"</li>");
+    $("#chat").append("<li>Question: "+data.message+"</li>");
   });
 
   $("#chat-submit").on("click", function() {
