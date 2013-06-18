@@ -19,7 +19,7 @@ describe "teacher posts a message", js: true do
     click_button "start quiz"
     fill_in "message", with: "this is the first question"
     click_button "post"
-    #expect( page).to have_content("Question: this is the first question")
+    expect( page).to have_content("Question: this is the first question")
 
   end
 end

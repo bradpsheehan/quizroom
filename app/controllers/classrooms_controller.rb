@@ -1,5 +1,6 @@
 class ClassroomsController < ApplicationController
 
+  respond_to :json, only: :update
   before_filter :require_login
   before_filter :is_teacher, only: [:new, :create]
 

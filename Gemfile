@@ -9,6 +9,8 @@ gem 'pg'
 gem 'haml'
 gem 'sorcery'
 gem 'faraday'
+gem 'faye'
+gem 'thin'
 
 group :test do
   gem 'rspec-rails'

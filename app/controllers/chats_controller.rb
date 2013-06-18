@@ -1,5 +1,7 @@
 class ChatsController < ApplicationController
 
+  respond_to :json, only: :update
+
   def create
 
     @chat = Chat.create
@@ -8,7 +10,9 @@ class ChatsController < ApplicationController
   end
 
   def update
-
+    #raise params.inspect
+    #@chat = Chat.find_by_id(:id)
+    respond_with @chat
   end
 
 

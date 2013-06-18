@@ -1,7 +1,11 @@
 .row
   .large-11.columns
+    %ul#chat
     = form_tag classroom_chat_path(params[:classroom_id], params[:id]), method: :put, remote: true do
       .field
         = label_tag :message
         = text_area_tag :message
-        = submit_tag "post"
+        = submit_tag "post", {id: "chat-submit"}
+
+= javascript_include_tag "http://localhost:9292/faye.js"
+= javascript_include_tag "faye_client.js"
