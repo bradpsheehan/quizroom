@@ -8,11 +8,11 @@ class ClassroomsController < ApplicationController
   end
 
   def show
-    @classroom = Classroom.find(current_user.id, params[:id])
+    @classroom = Classroom.find_by_id(params[:id])
   end
 
   def create
-    @classroom = Classroom.create(current_user.id, params[:class_name])
+    @classroom = Classroom.create(teacher_id: current_user.id, name: params[:class_name])
     if @classroom
       redirect_to classroom_path(@classroom.id)
     else
@@ -23,7 +23,8 @@ class ClassroomsController < ApplicationController
   private
 
   def is_teacher
-
+    redirect_to root_path unless current_user.teacher
+    current_user.teacher
   end
 
 end

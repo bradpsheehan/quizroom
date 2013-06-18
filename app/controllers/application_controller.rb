@@ -1,9 +1,6 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery
-  # helper_method :current_classroom
-
-
-
+  # helper_method :current_classroo
 
 
 

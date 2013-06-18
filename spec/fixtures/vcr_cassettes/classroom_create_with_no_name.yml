@@ -27,23 +27,23 @@ http_interactions:
       cache-control:
       - no-cache
       x-request-id:
-      - 8063004456593032960837423fe19eb5
+      - c874c77679582e8ad26a4a67040b9bb9
       x-runtime:
-      - '0.007585'
+      - '0.009341'
       server:
       - WEBrick/1.3.1 (Ruby/2.0.0/2013-05-14)
       date:
-      - Sun, 16 Jun 2013 23:42:52 GMT
+      - Tue, 18 Jun 2013 19:50:58 GMT
       content-length:
       - '38'
       connection:
       - close
       set-cookie:
-      - _classroomapp_session=BAh7BkkiD3Nlc3Npb25faWQGOgZFVEkiJWNjM2E5ZjdiZWI5MWNiMzczNDE5YWYzNDI4NjQyMjNhBjsAVA%3D%3D--515a4369982eac9e98668d4fcd325cf5fda725d1;
+      - _classroomapp_session=BAh7BkkiD3Nlc3Npb25faWQGOgZFVEkiJWRlOGNjNzA2MzgzNDg4YzJkMzM0NDUzMDVmYTA4MmIwBjsAVA%3D%3D--b9916f099acc2e05ce979494a91a4c1c5f9b9c0e;
         path=/; HttpOnly
     body:
       encoding: UTF-8
       string: '{"errors":{"name":["can''t be blank"]}}'
     http_version: '1.1'
-  recorded_at: Sun, 16 Jun 2013 23:42:52 GMT
+  recorded_at: Tue, 18 Jun 2013 19:50:58 GMT
 recorded_with: VCR 2.5.0
