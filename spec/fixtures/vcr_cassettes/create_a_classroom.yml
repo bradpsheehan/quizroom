@@ -21,33 +21,33 @@ http_interactions:
       message: 'Created '
     headers:
       location:
-      - http://localhost:3000/teachers/14/classrooms/77
+      - http://localhost:3000/teachers/14/classrooms/93
       content-type:
       - application/json; charset=utf-8
       x-ua-compatible:
       - IE=Edge
       etag:
-      - '"920dcddf9f48e22883ce1178bed5cdb2"'
+      - '"07436e54fea491b9b4c744f19c242313"'
       cache-control:
       - max-age=0, private, must-revalidate
       x-request-id:
-      - 63e6b53e734b1aa88d1f33c5a816958d
+      - b5047f43d75de1aa9a4db05941967d37
       x-runtime:
-      - '0.012413'
+      - '0.039482'
       server:
       - WEBrick/1.3.1 (Ruby/2.0.0/2013-05-14)
       date:
-      - Tue, 18 Jun 2013 02:12:26 GMT
+      - Tue, 18 Jun 2013 19:50:57 GMT
       content-length:
       - '53'
       connection:
       - close
       set-cookie:
-      - _classroomapp_session=BAh7BkkiD3Nlc3Npb25faWQGOgZFVEkiJTkwNTBkMDg3N2ZlYmM3YTE5NTI5Yzc2MjliYjJmYzJkBjsAVA%3D%3D--cd3ddfbe55fc14091c33de068fc2021ff4475056;
+      - _classroomapp_session=BAh7BkkiD3Nlc3Npb25faWQGOgZFVEkiJThhMDIxNjM4YTAwNzBlNmZlOTEzNmIxMzU1MjM2NjIzBjsAVA%3D%3D--a9ea453182dcfa91dcec5fbc7257429f69083e51;
         path=/; HttpOnly
     body:
       encoding: UTF-8
-      string: '{"id":77,"name":"Blair is a bro 101","teacher_id":14}'
+      string: '{"id":93,"name":"Blair is a bro 101","teacher_id":14}'
     http_version: '1.1'
-  recorded_at: Tue, 18 Jun 2013 02:12:26 GMT
+  recorded_at: Tue, 18 Jun 2013 19:50:57 GMT
 recorded_with: VCR 2.5.0

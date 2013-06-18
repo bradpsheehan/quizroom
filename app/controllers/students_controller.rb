@@ -6,6 +6,7 @@ class StudentsController < ApplicationController
 
   def create
     @students = User.find_or_create_students(params[:students])
+    Classroom.add_students(params[:classroom_id], @students)
     if @students
       redirect_to classroom_students_path(params[:classroom_id]),
       notice: "Students successfully created."

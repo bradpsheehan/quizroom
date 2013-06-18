@@ -16,6 +16,10 @@ class Classroom
     classroom = objectify(response)
   end
 
+  def self.add_students(classroom_id, students)
+
+  end
+
 private
 
   def self.connect
@@ -34,6 +38,7 @@ private
                      :name => data["name"],
                      :teacher_id => data["teacher_id"],
                      :id => data["id"]
+                     :student_ids => data["students"]
                     )
     end
   end
