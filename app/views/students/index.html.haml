@@ -1,0 +1,5 @@
+- @students.each do |student|
+  = student.email
+  %br/
+
+= link_to "Add Students", new_classroom_student_path(@classroom.id)
