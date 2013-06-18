@@ -22,7 +22,7 @@ class ClassroomsController < ApplicationController
   private
 
   def is_teacher
-
+    redirect_to root_path unless current_user.teacher
   end
 
 end
