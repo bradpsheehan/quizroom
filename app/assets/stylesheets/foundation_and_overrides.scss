@@ -1026,10 +1026,35 @@ $is-input: false;
 .pull-right {
   float: right;
 }
-.custom-button-wide {
+.custom-button {
   @include button($padding, $bg, $button-radius, $full-width, $disabled, $is-input);
-  margin-left: auto;
-  margin-right: auto;
-  display: block;
+}
+.side-nav {
+  width: 20%;
+  float: left;
+  min-height: 100%;
+  background-color: lightgray;
+}
+body, html {
+  height: 100%;
+}
+.top-bar {
+  overflow: hidden;
+  height: 45px;
+  line-height: 45px;
+  position: relative;
+  background: #111111;
+  margin-bottom: 0px;
+}
+.main_body {
+  width: 80%;
+  float: right;
+}
+.class-list {
+  width: 100%;
+  background-color: lightblue;
+  ul {
+    list-style-type: none;
+  }
 }
 
