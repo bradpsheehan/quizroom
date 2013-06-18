@@ -22,9 +22,26 @@ describe User do
       end
     end
 
-    context "with multiple students" do
+    context "with multiple students who don't exist" do
       it "creates the users" do
+        attributes = "ed@example.com, dick@example.com"
+        users = User.find_or_create_students(attributes)
+        expect(User.pluck(:email)).to include("dick@example.com")
+      end
+    end
 
+    context "with one student who already exists in the db" do
+      before do
+        student = User.new(email: "blair@kale.com")
+        student.password = "password"
+        student.password_confirmation = student.password
+        student.save
+      end
+
+      it "does not create a new student" do
+        attributes = "blair@kale.com"
+        user = User.find_or_create_students(attributes)
+        expect{user}.to_not change{User.count}.by(1)
       end
     end
   end
