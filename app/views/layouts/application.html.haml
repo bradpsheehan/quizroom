@@ -24,12 +24,12 @@
 
 %body
   =render 'header_nav'
-  - if current_user || @disable_side_nav = false
+  - if current_user || @disable_side_nav == false
     =render 'side_nav'
 
   -if flash[:notice]
     =flash[:notice]
 
-  .main_body  
+  .main_body
     = yield
 
