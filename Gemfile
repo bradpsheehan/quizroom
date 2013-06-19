@@ -11,6 +11,7 @@ gem 'sorcery'
 gem 'faraday'
 gem 'faye'
 gem 'thin'
+gem 'resque', '~> 1.24.1'
 
 group :test do
   gem 'rspec-rails'
@@ -26,6 +27,7 @@ end
 group :development do
   gem 'better_errors'
   gem 'binding_of_caller'
+  gem 'hirb'
 end
 
 
