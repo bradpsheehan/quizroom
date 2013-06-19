@@ -6,7 +6,7 @@
   New Classroom
 .class-list
   %ul
-  =current_user.classrooms.each do |classroom|
+  -current_user.classrooms.each do |classroom|
     %a{href: "/classrooms/#{classroom.id}"}
       %li
         %h3

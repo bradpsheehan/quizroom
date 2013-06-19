@@ -5,7 +5,7 @@ class StudentsController < ApplicationController
   end
 
   def create
-    @students = User.find_or_create_students(params[:students])
+    @students = Student.find_or_create_students(params[:students])
     classroom = Classroom.find_by_id(params[:classroom_id])
     classroom.add_students(@students)
     if classroom.save
