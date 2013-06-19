@@ -1,2 +1,5 @@
 .side-nav
-  =render "teacher_side_nav"
+  -if current_user.teacher?
+    =render "teacher_side_nav"
+  -else
+    =render "student_side_nav"

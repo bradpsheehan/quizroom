@@ -1,29 +1,15 @@
 #side-header
   %h2
     Classrooms
-%a.custom-button{href: "/classrooms/new"}
+    / =link_to "New Classroom", new_classroom_path
+%a.custom-button{href: "#{new_classroom_path}"}
   New Classroom
 .class-list
   %ul
-    %a{href: "/classrooms/1"}
+  =current_user.classrooms.each do |classroom|
+    %a{href: "/classrooms/#{classroom.id}"}
       %li
         %h3
-          English
-    %a{href: "/classrooms/1"}
-      %li
-        %h3
-          Math
-    %a{href: "/classrooms/1"}
-      %li
-        %h3
-          Computers
-    %a{href: "/classrooms/1"}
-      %li
-        %h3
-          Science
-    %a{href: "/classrooms/1"}
-      %li
-        %h3
-          Spanish
+          =classroom.name
 
 
