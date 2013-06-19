@@ -1,6 +1,8 @@
 class Classroom < ActiveRecord::Base
   attr_accessible :teacher_id, :name
-  has_and_belongs_to_many :students, class_name: 'User'
+  belongs_to :teacher, class_name: 'User'
+  has_and_belongs_to_many :students, class_name: 'User',
+    conditions: ['teacher = ?', false], join_table: :classrooms_users
 
   def add_students(student_ids)
 
