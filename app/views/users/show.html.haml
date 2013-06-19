@@ -1,7 +1,10 @@
 .row
   .large-11.columns
-    %a.custom-button-wide{href: "#{new_classroom_path}"}
-      New Classroom
+    -if current_user.teacher?
+      %a.custom-button-wide{href: "#{new_classroom_path}"}
+        New Classroom
+    -else
+      %p Welcome student!
 
 
 

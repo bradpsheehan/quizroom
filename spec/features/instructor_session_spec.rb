@@ -5,6 +5,7 @@ describe "Instructor login and logout" do
     u = User.new(first_name: "joe", last_name:"smith", email: "abc@example.com")
     u.password = "password"
     u.password_confirmation = "password"
+    u.teacher = true
     u.save!
 
     visit root_path
@@ -13,7 +14,6 @@ describe "Instructor login and logout" do
     fill_in 'password', :with => "password"
     click_button 'login'
     expect( page ).to have_content 'Logged In!'
-    # expect( current_path ).to eq user_path(user)
     expect( page ).to have_link 'New Classroom'
 
     click_link "logout"

@@ -8,12 +8,12 @@
         %span Menu
   %section.top-bar-section
     %ul.right
-      %li.divider
+      - if current_user
+        %li
+          = link_to 'logout', logout_path
+      - else
         %li
           =link_to 'signup', signup_path
         %li.divider
         %li
-          -if current_user
-            =link_to 'logout', logout_path
-          -else
-            =link_to 'login', login_path
+          = link_to 'login', login_path

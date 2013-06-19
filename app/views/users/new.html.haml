@@ -3,6 +3,7 @@
     %h1
       Sign Up for QuizRoom
     =form_for @user do |f|
+      =f.hidden_field :teacher, value: true
       =f.label 'First Name'
       =f.text_field :first_name
       =f.label 'Last Name'
