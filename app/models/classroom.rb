@@ -5,7 +5,6 @@ class Classroom < ActiveRecord::Base
     conditions: ['teacher = ?', false], join_table: :classrooms_users
 
   def add_students(student_ids)
-
     student_ids.each do |id|
       user = User.find_by_id(id)
       if user
