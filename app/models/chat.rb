@@ -9,6 +9,6 @@ class Chat < ActiveRecord::Base
   private
 
   def generate_public_channel
-    public_channel ||= "blah"
+    self.public_channel ||= "/blah"
   end
 end
