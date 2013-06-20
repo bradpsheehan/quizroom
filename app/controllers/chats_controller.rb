@@ -8,7 +8,7 @@ class ChatsController < ApplicationController
 
   def create
 
-    @chat = Chat.create
+    @chat = Chat.create(classroom_id: params[:classroom_id])
     redirect_to classroom_chat_path(params[:classroom_id], @chat)
 
   end

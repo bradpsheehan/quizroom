@@ -9,6 +9,6 @@ class Chat < ActiveRecord::Base
   private
 
   def generate_public_channel
-    self.public_channel ||= "/blah"
+    self.public_channel ||= Digest::SHA1.hexdigest(classroom_id.to_s)
   end
 end
