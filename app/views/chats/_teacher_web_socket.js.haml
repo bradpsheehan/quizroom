@@ -1,0 +1,29 @@
+= javascript_include_tag "http://localhost:9292/faye.js"
+
+:javascript
+  $(document).ready( function() {
+    var faye = new Faye.Client('http://localhost:9292/faye');
+
+    var publicChannel = $('#chat').data("public-channel");
+    faye.subscribe("/#{@chat.public_channel}", function(data) {
+      console.log(data);
+      $("#chat").append("<li>Question: "+data.message+"</li>");
+    });
+
+    var teacherChannel = $('#chat').data("teacher-channel");
+    faye.subscribe("/#{@chat.teacher_channel}", function(data) {
+      console.log(data);
+      var name = data['student']
+      $("#chat").append("<li>"+name+": "+data.message+"</li>");
+    });
+
+    $("form").on("submit", function() {
+
+      var publishChannel = $("#publish_channel").val();
+
+      faye.publish("/#{@chat.public_channel}", {
+        message: $("#message").val()
+      });
+      $("form")[0].reset();
+    });
+  });

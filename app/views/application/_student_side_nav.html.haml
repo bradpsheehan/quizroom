@@ -1,0 +1,13 @@
+#side-header
+  %h2
+    Classrooms
+    / =link_to "New Classroom", new_classroom_path
+.class-list
+  %ul
+  -current_user.classrooms.each do |classroom|
+    %a{href: "/classrooms/#{classroom.id}"}
+      %li
+        %h3
+          =classroom.name
+
+

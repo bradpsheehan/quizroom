@@ -5,7 +5,7 @@
     var faye = new Faye.Client('http://localhost:9292/faye');
 
     var channel = $('#chat').data("channel");
-    faye.subscribe("/"+channel, function(data) {
+    faye.subscribe("/#{@chat.public_channel}", function(data) {
       console.log(data);
       $("#chat").append("<li>Question: "+data.message+"</li>");
     });
@@ -14,8 +14,10 @@
 
       var publishChannel = $("#publish_channel").val();
 
-      faye.publish("/"+publishChannel, {
-        message: $("#message").val()
+      faye.publish("/#{@chat.teacher_channel}", {
+        message: $("#message").val(),
+        student: "#{current_user.first_name} #{current_user.last_name}"
+
       });
       $("form")[0].reset();
     });

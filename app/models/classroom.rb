@@ -1,6 +1,7 @@
 class Classroom < ActiveRecord::Base
   attr_accessible :teacher_id, :name
   belongs_to :teacher
+  has_one :chat
   has_and_belongs_to_many :students
 
   def add_students(student_ids)
@@ -13,6 +14,10 @@ class Classroom < ActiveRecord::Base
     end
 
     save
+  end
+
+  def in_session?
+    !chat.nil?
   end
 
 end
