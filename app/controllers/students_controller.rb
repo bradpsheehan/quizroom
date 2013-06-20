@@ -8,7 +8,7 @@ class StudentsController < ApplicationController
     @students = User.find_or_create_students(params[:students])
     classroom = Classroom.find_by_id(params[:classroom_id])
     classroom.add_students(@students)
-    UserMailer.invite_students_to_classroom(@students)
+    UserMailer.invite_students_to_classroom(@students, classroom)
     if classroom.save
       redirect_to classroom_students_path(params[:classroom_id]),
       notice: "Students successfully created."
