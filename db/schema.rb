@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130619215928) do
+ActiveRecord::Schema.define(:version => 20130620212952) do
 
   create_table "chats", :force => true do |t|
     t.string   "public_channel"
@@ -43,6 +43,7 @@ ActiveRecord::Schema.define(:version => 20130619215928) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "type"
+    t.string   "token"
   end
 
 end

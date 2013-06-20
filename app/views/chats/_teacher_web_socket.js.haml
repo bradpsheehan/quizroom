@@ -7,14 +7,7 @@
     var publicChannel = $('#chat').data("public-channel");
     faye.subscribe("/#{@chat.public_channel}", function(data) {
       console.log(data);
-      $("#chat").append("<li>Question: "+data.message+"</li>");
-    });
-
-    var teacherChannel = $('#chat').data("teacher-channel");
-    faye.subscribe("/#{@chat.teacher_channel}", function(data) {
-      console.log(data);
-      var name = data['student']
-      $("#chat").append("<li>"+name+": "+data.message+"</li>");
+      $("#chat").append("<li>"+data.sender+": "+data.message+"</li>");
     });
 
     $("form").on("submit", function() {
@@ -22,7 +15,10 @@
       var publishChannel = $("#publish_channel").val();
 
       faye.publish("/#{@chat.public_channel}", {
-        message: $("#message").val()
+        message: $("#message").val(),
+        isQuestion: true,
+        sender: "Question"
+
       });
       $("form")[0].reset();
     });

@@ -3,9 +3,12 @@ class User < ActiveRecord::Base
   attr_accessible :first_name, :last_name, :email, :teacher
   validates_confirmation_of :password, :message => "should match confirmation", :if => :password
 
-  #has_many :classrooms
+  before_save :generate_token
 
-  #has_and_belongs_to_many :classrooms
+
+  def generate_token
+    self.token ||= Digest::SHA1.hexdigest(id.to_s)
+  end
 
   def self.new_with_password(user_attributes)
     password = user_attributes.delete(:password)

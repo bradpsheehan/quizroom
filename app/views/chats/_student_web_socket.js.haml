@@ -7,16 +7,26 @@
     var channel = $('#chat').data("channel");
     faye.subscribe("/#{@chat.public_channel}", function(data) {
       console.log(data);
-      $("#chat").append("<li>Question: "+data.message+"</li>");
+      if(data.isQuestion || data.token === "#{current_user.token}") {
+        $("#chat").append("<li>"+data.sender+": "+data.message+"</li>");
+      }
+
     });
 
     $("form").on("submit", function() {
 
       var publishChannel = $("#publish_channel").val();
 
+      faye.publish("/#{@chat.public_channel}", {
+        message: $("#message").val(),
+        sender: "#{current_user.first_name} #{current_user.last_name}",
+        token: "#{current_user.token}"
+
+      });
       faye.publish("/#{@chat.teacher_channel}", {
         message: $("#message").val(),
-        student: "#{current_user.first_name} #{current_user.last_name}"
+        sender: "#{current_user.first_name} #{current_user.last_name}",
+        token: "#{current_user.token}"
 
       });
       $("form")[0].reset();
