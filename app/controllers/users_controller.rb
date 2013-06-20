@@ -19,7 +19,7 @@ class UsersController < ApplicationController
   end
 
   def show
-
+    @disable_side_nav = true
   end
 
 
