@@ -22,7 +22,7 @@ describe "creates a classroom" do
   end
 
   it "doesn't let an unauthorized user create a classroom" do
-    u = User.new(first_name: "joe", last_name:"smith", email: "blah@example.com")
+    u = Student.new(first_name: "joe", last_name:"smith", email: "blah@example.com")
     u.password = "password"
     u.password_confirmation = "password"
     u.save!
