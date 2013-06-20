@@ -4,7 +4,11 @@ class Chat < ActiveRecord::Base
 
   attr_accessible :classroom_id, :classroom_name
 
+  before_save :generate_public_channel
 
+  private
 
-
+  def generate_public_channel
+    public_channel ||= "blah"
+  end
 end

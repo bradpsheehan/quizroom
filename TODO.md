@@ -1,4 +1,3 @@
-* Render classrooms in side_nav
 * make different chats per class room
   * generate channels for each chat
   * subscribe to the right channel based on the the user (student? or teacher?)
