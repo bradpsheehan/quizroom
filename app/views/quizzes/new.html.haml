@@ -1,0 +1,26 @@
+.main-body
+  .row
+    .large-8.cloumns
+      %h1
+        Create a Quiz
+      = form_tag quizzes_path do
+        .field
+          = label_tag :quiz_name
+          = text_field_tag :quiz_name
+        .field
+          = label_tag :question
+          = text_area_tag :question
+        .field
+          = label_tag :answer
+          = radio_button_tag :option1, :answer
+          = text_area_tag :answer
+        .field
+          = label_tag :answer
+          = text_area_tag :answer
+        .actions
+          = submit_tag "Add Another Question"
+        .actions
+          = submit_tag "save"
+
+:javascript
+  $("input[type='radio']").before(input[type
