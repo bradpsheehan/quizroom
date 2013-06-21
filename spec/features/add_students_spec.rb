@@ -12,8 +12,9 @@ describe 'add students to a class' do
 
     login_user_post(u.email, "password")
 
-    classroom = Classroom.create(teacher_id: u.id, name: "English")
-    visit classroom_path(classroom.id)
+    visit new_classroom_path
+    fill_in 'class_name', :with => "English for Rockstars"
+    click_button 'create'
 
     click_link('Add Students')
     fill_in('students', with: 'student1@example.com, student2@example.com')

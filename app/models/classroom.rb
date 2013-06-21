@@ -23,4 +23,9 @@ class Classroom < ActiveRecord::Base
       UserMailer.delay.invite_firsttime_student_to_classroom(student, self)
     end
   end
+
+  def members
+    members = []
+    (members << students + [teacher]).flatten!
+  end
 end
