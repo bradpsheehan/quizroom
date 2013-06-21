@@ -18,6 +18,21 @@ class UsersController < ApplicationController
     end
   end
 
+  def complete_signup
+    @user = User.find(params[:id])
+  end
+
+  def update
+    @user = User.find(params[:id])
+    @user.update_with_password(params[:user])
+    if @user.save
+      flash[:notice] = "Account creation successful"
+      redirect_to root_path
+    else
+      render :complete_signup
+    end
+  end
+
   def show
 
   end

@@ -7,6 +7,9 @@ class ClassroomsController < ApplicationController
     @classroom = Classroom.find_by_id(params[:id])
   end
 
+  def new
+  end
+
   def create
     @classroom = Classroom.create(teacher_id: current_user.id, name: params[:class_name])
     if @classroom
@@ -24,8 +27,11 @@ class ClassroomsController < ApplicationController
 
   def validate_access_rights
     classroom = Classroom.find(params[:id])
-    unless classroom.members.include?(current_user)
+    if current_user && !classroom.members.include?(current_user)
       redirect_to root_path,
+      notice: "You must be a member of this Quizroom to view this page!"
+    elsif !current_user
+      redirect_to login_path,
       notice: "You must be logged in and a member of this Quizroom to view this page!"
     end
   end
