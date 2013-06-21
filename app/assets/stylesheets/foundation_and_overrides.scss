@@ -1030,6 +1030,10 @@ $is-input: false;
   @include button($padding, $bg, $button-radius, $full-width, $disabled, $is-input);
   background-color: #2ECC71;
 }
+.custom-button-small {
+  @include button($padding, $bg, $button-radius, $disabled, $is-input);
+  background-color: #2ECC71;
+}
 .custom-button:hover {
   background-color: #27AE60;
   -webkit-transition: all 500ms ease;
@@ -1101,5 +1105,10 @@ ul#chat {
   border: 1px solid black;
   padding: 10px;
 }
-
+#answer-radio {
+  margin-top: 15px;
+}
+.quiz-question {
+  margin-botton: 80px;
+}
 
