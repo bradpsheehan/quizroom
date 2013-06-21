@@ -18,10 +18,12 @@
         .field
           %h4
             Answers
-          #answer-radio.large-1.pull-left
-            = radio_button_tag :option1, ""
-          .large-11.pull-left
-            = text_area_tag :answer
+          #draggable
+            %p
+            #answer-radio.large-1.pull-left
+              = radio_button_tag :option1, ""
+            .large-11.pull-left
+              = text_area_tag :answer
         .field
           #answer-radio.large-1.pull-left
             = radio_button_tag :option1, ""
@@ -42,4 +44,5 @@
         Add Another Question
       .actions
         = submit_tag "save"
+
 

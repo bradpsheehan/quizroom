@@ -1042,15 +1042,13 @@ $is-input: false;
   -o-transition: all 500ms ease;
   transition: all 500ms ease;
 }
-.side-nav {
-  width: 20%;
-  float: left;
-  min-height: 100%;
-  background-color: lightgray;
-  -webkit-box-shadow: 3px -2px 1px -2px gray;
-}
-body, html {
-  height: 100%;
+.custom-button-small:hover {
+  background-color: #27AE60;
+  -webkit-transition: all 500ms ease;
+  -moz-transition: all 500ms ease;
+  -ms-transition: all 500ms ease;
+  -o-transition: all 500ms ease;
+  transition: all 500ms ease;
 }
 .top-bar {
   overflow: hidden;
@@ -1110,5 +1108,20 @@ ul#chat {
 }
 .quiz-question {
   margin-botton: 80px;
+}
+#draggable {
+  p { cursor: move; }
+}
+.side-nav {
+  width: 20%;
+  float: left;
+  background-color: lightgray;
+  -webkit-box-shadow: 3px -2px 1px -2px gray;
+}
+.fixed-left {
+  width: 20%;
+  height: 100%;
+  left: 0;
+  position: fixed;
 }
 
