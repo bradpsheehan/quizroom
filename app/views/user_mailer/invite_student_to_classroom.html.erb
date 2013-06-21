@@ -1,0 +1,7 @@
+<p>Hello <%= @student.first_name
+ %>,</p>
+
+<p>You have been invited to join the Quizroom for <%= @classroom.name %> by <%= @classroom.teacher.full_name %>.  <%= link_to "Click here", "http://localhost:3000/classrooms/#{@classroom.id}" %> to check out the Quizroom and join in on the fun!</p>
+
+<p>Thanks,<br>
+Your Quizroom Team</p>

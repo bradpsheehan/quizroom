@@ -20,7 +20,7 @@ class User < ActiveRecord::Base
     new_students = emails - self.pluck(:email)
     new_students.each do |email|
       user = User.new(email: email)
-      user.password = email.split("@")[0]
+      user.password = user.email.split("@")[0]
       user.password_confirmation = user.password
       user.save
     end
@@ -33,5 +33,9 @@ class User < ActiveRecord::Base
 
   def self.find_ids(student_emails)
     User.where(:email => student_emails).pluck(:id)
+  end
+
+  def full_name
+    "#{first_name} #{last_name}"
   end
 end

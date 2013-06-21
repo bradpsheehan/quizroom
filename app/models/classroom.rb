@@ -7,12 +7,20 @@ class Classroom < ActiveRecord::Base
   def add_students(student_ids)
     student_ids.each do |id|
       user = User.find_by_id(id)
-      if user
+      if user && !students.include?(user)
         students << user
+        send_classroom_confirmation_email(user)
       end
     end
 
     save
   end
 
+  def send_classroom_confirmation_email(student)
+    if student.first_name
+      UserMailer.delay.invite_student_to_classroom(student, self)
+    else
+      UserMailer.delay.invite_firsttime_student_to_classroom(student, self)
+    end
+  end
 end

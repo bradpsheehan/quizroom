@@ -8,6 +8,7 @@ describe 'add students to a class' do
     u.password_confirmation = "password"
     u.teacher = true
     u.save!
+    u2 = User.create(first_name: "brad", email: "student3@example.com")
 
     login_user_post(u.email, "password")
 
