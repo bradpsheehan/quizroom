@@ -3,6 +3,8 @@ require 'spec_helper'
 describe 'adding students to a class' do
 
   it 'adds newly created students and sends an email' do
+    ActionMailer::Base.deliveries = []
+
     teacher_email = "abc@example.com"
     teacher_password = "password"
 
