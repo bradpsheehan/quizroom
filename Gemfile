@@ -23,6 +23,7 @@ group :test do
   gem 'vcr', '~> 2.5.0'
   gem 'fakeweb', '~> 1.3.0'
   gem 'selenium-webdriver'
+  gem 'database_cleaner'
 end
 
 group :development do
