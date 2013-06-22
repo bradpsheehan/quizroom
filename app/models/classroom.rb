@@ -3,6 +3,7 @@ class Classroom < ActiveRecord::Base
   belongs_to :teacher
   has_one :chat
   has_and_belongs_to_many :students
+  has_many :quizzes
 
   def add_students(student_ids)
 
