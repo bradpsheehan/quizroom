@@ -1,6 +1,12 @@
 require 'spec_helper'
 
 describe User do
+
+  it "has a full name" do
+    user = User.new(first_name: "Elaine", last_name: "Tai")
+    expect(user.full_name).to eq("Elaine Tai")
+  end
+
   describe ".create_with_password" do
     it "creates a user" do
       attributes = {

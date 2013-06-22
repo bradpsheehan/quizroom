@@ -11,6 +11,8 @@ gem 'sorcery'
 gem 'faraday'
 gem 'faye'
 gem 'thin'
+gem 'resque', '~> 1.24.1'
+gem 'delayed_job_active_record'
 
 group :test do
   gem 'rspec-rails'
@@ -21,11 +23,13 @@ group :test do
   gem 'vcr', '~> 2.5.0'
   gem 'fakeweb', '~> 1.3.0'
   gem 'selenium-webdriver'
+  gem 'database_cleaner'
 end
 
 group :development do
   gem 'better_errors'
   gem 'binding_of_caller'
+  gem 'hirb'
 end
 
 

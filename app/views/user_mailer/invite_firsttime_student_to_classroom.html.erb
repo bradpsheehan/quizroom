@@ -1,0 +1,8 @@
+<p>Hello <%= @student.email %>,</p>
+
+<p>Your instructor, <%= @classroom.teacher.full_name %>, has created a Quizroom account for you and has invited you to join the Quizroom for <%= @classroom.name %>.</p>
+
+<p><%= link_to "Click here", "http://localhost:3000/complete_signup/#{@student.id}?class_id=#{@classroom.id}" %> to complete your Quizroom registration, and then join in on the fun!</p>
+
+<p>Thanks,<br>
+Your Quizroom Team</p>
