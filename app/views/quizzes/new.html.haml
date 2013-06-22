@@ -1,5 +1,5 @@
 .row
-  .large-8.cloumns
+  #main-content.large-9.cloumns
     %h1
       Create a Quiz
     .quiz-question
@@ -8,41 +8,42 @@
           %h3
             Quiz Name
           = text_field_tag :quiz_name
-        %br
         %hr
-        %br
         .field
           %h4
             Question
           = text_area_tag :question
-        .field
-          %h4
-            Answers
-          #draggable
-            %p
-            #answer-radio.large-1.pull-left
-              = radio_button_tag :option1, ""
-            .large-11.pull-left
-              = text_area_tag :answer
-        .field
-          #answer-radio.large-1.pull-left
-            = radio_button_tag :option1, ""
-          .large-11.pull-left
-            = text_area_tag :answer
-        .field
-          #answer-radio.large-1.pull-left
-            = radio_button_tag :option1, ""
-          .large-11.pull-left
-            = text_area_tag :answer
-        .field
-          #answer-radio.large-1.pull-left
-            = radio_button_tag :option1, ""
-          .large-11.pull-left
-            = text_area_tag :answer
+        %h4
+          Answers
+        %p
+        (click button to side of text field to indicate the correct answer)
+        %ul.answer-list
+          %li
+            .field
+              .row
+                .large-1.columns.answer-radio
+                  = radio_button_tag :option1, ""
+                .large-10.columns
+                  = text_area_tag :answer
+                .large-1.columns
+                  = link_to "X", "#", class: "remove-link"
+          %li
+            .field
+              .row
+                .large-1.columns.answer-radio
+                  = radio_button_tag :option1, ""
+                .large-10.columns
+                  .ghost-answer
+                    Add another answer
+                  / = text_area_tag :answer, nil, {disabled: true, placeholder: "Add another answer", class: "ghost-answer"}
+                .large-1.columns
     %hr
-      .actions.custom-button-small
+      .actions.custom-button-small.pull-left
         Add Another Question
-      .actions
-        = submit_tag "save"
+      .actions.custom-button-small.pull-right
+        Save Quiz
+        / = submit_tag "save"
+
+
 
 

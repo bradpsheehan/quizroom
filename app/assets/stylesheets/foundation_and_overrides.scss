@@ -1020,6 +1020,10 @@ $is-input: false;
 
 @import 'foundation';
 
+html > body {
+  background-color: #f2f2f2;
+}
+
 .pull-left {
   float: left;
 }
@@ -1103,14 +1107,11 @@ ul#chat {
   border: 1px solid black;
   padding: 10px;
 }
-#answer-radio {
+.answer-radio {
   margin-top: 15px;
 }
 .quiz-question {
   margin-botton: 80px;
-}
-#draggable {
-  p { cursor: move; }
 }
 .side-nav {
   width: 20%;
@@ -1123,5 +1124,22 @@ ul#chat {
   height: 100%;
   left: 0;
   position: fixed;
+}
+#main-content {
+  margin-left: auto;
+  margin-right: auto;
+}
+ul.answer-list {
+  li {
+    list-style-type: none;
+  }
+}
+.ghost-answer {
+  border: 1px solid lightgray;
+  height: 50px;
+  text-align: center;
+  background-color: white;
+  opacity: .75;
+  padding: 10px;
 }
 
