@@ -22,7 +22,7 @@ class StudentsController < ApplicationController
 
   def index
     @classroom = Classroom.find_by_id(params[:classroom_id])
-    @students = @classroom.students #TODO make this only students associated with the classroom
+    @students = @classroom.students
   end
 
   private

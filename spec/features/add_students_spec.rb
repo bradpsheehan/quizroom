@@ -1,20 +1,34 @@
 require 'spec_helper'
 
-describe 'add students to a class' do
+describe 'adding students to a class' do
+  def create_teacher(first_name, last_name, email, password)
+    u = User.create! do |u|
+        u.first_name = first_name
+        u.last_name = last_name
+        u.email = email
+        u.password = password
+        u.password_confirmation = password
+        u.teacher = true
+    end
+  end
 
-  it 'adds students to a class' do
-    u = User.new(first_name: "joe", last_name:"smith", email: "abc@example.com")
-    u.password = "password"
-    u.password_confirmation = "password"
-    u.teacher = true
-    u.save!
-    u2 = User.create(first_name: "brad", email: "student3@example.com")
+  def create_student(fist_name, email)
+    User.create(first_name: first_name, email: email)
+  end
 
-    login_user_post(u.email, "password")
+  it 'adds newly created students and sends an email' do
+    teacher_email = "abc@example.com"
+    teacher_password = "password"
 
-    visit new_classroom_path
-    fill_in 'class_name', :with => "English for Rockstars"
-    click_button 'create'
+    teacher = create_teacher("joe", "smith", teacher_email, teacher_password)
+    classroom = teacher.classrooms.create!(name: 'English for Rockstars')
+    # Why do we need this?
+    classroom.teacher_id = teacher.id
+    classroom.save!
+
+    login_user_post(teacher_email, teacher_password)
+
+    visit classroom_path(classroom)
 
     click_link('Add Students')
     fill_in('students', with: 'student1@example.com, student2@example.com')
@@ -24,11 +38,6 @@ describe 'add students to a class' do
     expect(page).to have_content('student1@example.com')
     expect(page).to have_content('student2@example.com')
 
-    click_link('Add Students')
-    fill_in('students', with: 'student3@example.com')
-
-    click_button('Add Students')
-
-    expect(page).to have_content('student3@example.com')
+    expect(ActionMailer::Base.deliveries.length).to eq 2
   end
 end

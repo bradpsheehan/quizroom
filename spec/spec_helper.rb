@@ -60,3 +60,5 @@ module Sorcery
     end
   end
 end
+
+Delayed::Worker.delay_jobs = false
