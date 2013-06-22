@@ -20,6 +20,7 @@ class UsersController < ApplicationController
 
   def complete_signup
     @user = User.find(params[:id])
+    @class_id = params[:class_id]
   end
 
   def update
@@ -27,7 +28,8 @@ class UsersController < ApplicationController
     @user.update_with_password(params[:user])
     if @user.save
       flash[:notice] = "Account creation successful"
-      redirect_to root_path
+      destination = classroom_path(params[:redirect]) || root_path
+      redirect_to destination
     else
       render :complete_signup
     end
