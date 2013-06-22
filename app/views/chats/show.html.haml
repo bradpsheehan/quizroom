@@ -1,22 +1,18 @@
-.row
-  #main-content.large-11.columns
-    - if current_user.teacher?
-      %ul#chat{ data: { "teacher-channel" => @chat.teacher_channel, "public-channel" => @chat.public_channel} }
-    - else
-      %ul#chat{ data: { channel: @chat.public_channel} }
+.main-body
+  .row
+    .large-11.columns
+      - if current_user.teacher?
+        %ul#chat{ data: { "teacher-channel" => @chat.teacher_channel, "public-channel" => @chat.public_channel} }
 
-    = form_tag classroom_chat_path(params[:classroom_id], params[:id]), method: :put, remote: true do
-      .field
-        - if current_user.teacher?
-          = hidden_field_tag :publish_channel, @chat.public_channel
-        - else
-          = hidden_field_tag :publish_channel, @chat.teacher_channel
-        = label_tag :message
-        = text_area_tag :message
-        = submit_tag "post", {id: "chat-submit"}
-
-
-- if current_user.teacher?
-  = render 'teacher_web_socket.js'
-- else
-  = render 'student_web_socket.js'
+        = form_tag classroom_chat_path(params[:classroom_id], params[:id]), method: :put, remote: true do
+          .field
+            - if current_user.teacher?
+              = hidden_field_tag :publish_channel, @chat.public_channel
+            - else
+              = hidden_field_tag :publish_channel, @chat.teacher_channel
+            = label_tag :message
+            = text_area_tag :message
+            = submit_tag "post", {id: "chat-submit"}
+        = render 'teacher_web_socket.js'
+      - else
+        = render 'student_show'

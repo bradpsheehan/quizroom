@@ -1,0 +1,28 @@
+%h1 Quiz Name
+%h2 Question 1
+%p Bacon ipsum dolor sit amet tri-tip short ribs prosciutto beef ribs, beef turkey ham shoulder flank t-bone. Sirloin cow frankfurter ham hock leberkas turducken. Turkey biltong tail cow filet mignon doner beef ribs?
+
+= form_tag "path_to_answer_quiz", id:"submit-answer" do
+  .field
+    = label_tag :answer do
+      = radio_button_tag :answer, :answer_1
+      Tongue swine capicola filet mignon. Short ribs doner pork bresaola.
+  .field
+    = label_tag :answer do
+      = radio_button_tag :answer, :answer_2
+      Tri-tip tail pancetta, short loin ball tip pork belly swine strip steak. Shankle ham shoulder, short ribs jerky strip steak drumstick bresaola.
+  .field
+    = label_tag :answer do
+      = radio_button_tag :answer, :answer_3
+      Ground round t-bone tenderloin, flank turkey meatloaf pancetta chuck. Corned beef pork belly leberkas, meatloaf pancetta sausage turducken t-bone beef shankle doner shoulder.
+  .field
+    = label_tag :answer do
+      = radio_button_tag :answer, :answer_4
+      None of the above
+
+  = submit_tag "Submit", class: "button"
+
+  = javascript_tag "submit_answer.js"
+
+  = render 'student_web_socket.js'
+
