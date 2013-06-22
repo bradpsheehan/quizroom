@@ -1012,7 +1012,7 @@ $padding: $button-med;
 
 $bg: $primary-color;
 
-$full-width: false;
+$full-width: true;
 
 $disabled: false;
 
@@ -1026,11 +1026,70 @@ $is-input: false;
 .pull-right {
   float: right;
 }
-.custom-button-wide {
+.custom-button {
   @include button($padding, $bg, $button-radius, $full-width, $disabled, $is-input);
-  margin-left: auto;
-  margin-right: auto;
-  display: block;
+  background-color: #2ECC71;
+}
+.custom-button:hover {
+  background-color: #27AE60;
+  -webkit-transition: all 500ms ease;
+  -moz-transition: all 500ms ease;
+  -ms-transition: all 500ms ease;
+  -o-transition: all 500ms ease;
+  transition: all 500ms ease;
+}
+.side-nav {
+  width: 20%;
+  float: left;
+  min-height: 100%;
+  background-color: lightgray;
+  -webkit-box-shadow: 3px -2px 1px -2px gray;
+}
+body, html {
+  height: 100%;
+}
+.top-bar {
+  overflow: hidden;
+  height: 45px;
+  line-height: 45px;
+  position: relative;
+  background: #111111;
+  margin-bottom: 0px;
+}
+.main-body {
+  width: 80%;
+  float: right;
+  margin-top: 20px;
+}
+.class-list {
+  color: white;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  width: 100%;
+  height: 350px;
+  ul {
+    list-style-type: none;
+  }
+  li {
+    height: 50px;
+    border: 1px solid #2284a1;
+    background-color: #2ba6cb;
+    text-align: center;
+  }
+}
+.class-list li:hover {
+  background-color: #2284a1;
+  -webkit-transition: all 500ms ease;
+  -moz-transition: all 500ms ease;
+  -ms-transition: all 500ms ease;
+  -o-transition: all 500ms ease;
+  transition: all 500ms ease;
+}
+#side-header {
+  text-align: center;
+  text-shadow: 0px 1px 0px rgba(255,255,255,.3), 0px -1px 0px rgba(0,0,0,.7);
+  h2 {
+    color: gray;
+  }
 }
 ul#chat li{
   list-style: none;
