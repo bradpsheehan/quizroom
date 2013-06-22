@@ -46,6 +46,11 @@ RSpec.configure do |config|
   config.order = "random"
 end
 
+Capybara.configure do |config|
+  config.match = :prefer_exact
+  config.ignore_hidden_elements = false
+end
+
 module Sorcery
   module TestHelpers
     module Rails
