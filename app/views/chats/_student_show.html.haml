@@ -1,8 +1,9 @@
 %h1 Quiz Name
-%h2 Question 1
+
+%h2#question-title Question 1
 %p Bacon ipsum dolor sit amet tri-tip short ribs prosciutto beef ribs, beef turkey ham shoulder flank t-bone. Sirloin cow frankfurter ham hock leberkas turducken. Turkey biltong tail cow filet mignon doner beef ribs?
 
-= form_tag "path_to_answer_quiz", id:"submit-answer" do
+= form_tag "path_to_answer_quiz", id:"answer" do
   .field
     = label_tag :answer do
       = radio_button_tag :answer, :answer_1
@@ -21,8 +22,6 @@
       None of the above
 
   = submit_tag "Submit", class: "button"
-
-  = javascript_tag "submit_answer.js"
 
   = render 'student_web_socket.js'
 
