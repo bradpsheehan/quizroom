@@ -17,9 +17,10 @@ describe "teacher posts a message", js: true do
     click_button 'create'
 
     click_button "start quiz"
-    fill_in "message", with: "this is the first question"
-    click_button "post"
+    pending "Need to change form when we have real quizzes"
+    click_link "Start Quiz"
     expect( page).to have_content("Question: this is the first question")
+    expect(page).to have_selector("next-question")
 
   end
 end

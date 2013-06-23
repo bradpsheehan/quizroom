@@ -1,14 +1,57 @@
 = content_for :extra_scripts do
   = javascript_include_tag "http://localhost:9292/faye.js"
 
-  :javascript
-    $(document).ready( function() {
-      var faye = new Faye.Client('http://localhost:9292/faye');
+:javascript
+  var exampleQuestion = {
+    quizName: "A Quiz",
+    id: 5,
+    title: "Bacon ipsum dolor sit amet tri-tip short ribs prosciutto beef ribs, beef turkey ham shoulder flank t-bone. Sirloin cow frankfurter ham hock leberkas turducken. Turkey biltong tail cow filet mignon doner beef ribs?",
+    answers: [
+      {
+        id: 1,
+        text: "Tongue swine capicola filet mignon. Short ribs doner pork bresaola.",
+        submitPath: "path_to_submit_this_answer"
+      },
+      {
+        id: 2,
+        text: "Tongue swine capicola filet mignon. Short ribs doner pork bresaola.Tri-tip tail pancetta, short loin ball tip pork belly swine strip steak. Shankle ham shoulder, short ribs jerky strip steak drumstick bresaola.",
+        submitPath: "path_to_submit_this_answer"
+      },
+      {
+        id: 3,
+        text: "Ground round t-bone tenderloin, flank turkey meatloaf pancetta chuck. Corned beef pork belly leberkas, meatloaf pancetta sausage turducken t-bone beef shankle doner shoulder.",
+        submitPath: "path_to_submit_this_answer"
+      },
+      {
+        id: 4,
+        text: "None of the above",
+        submitPath: "path_to_submit_this_answer"
+      },
+    ],
+    next_question_path: "path_to_get_the_next_question"
+  };
 
+  $(document).ready( function() {
+    $("section.question").hide();
+
+    var faye = new Faye.Client('http://localhost:9292/faye');
     var publicChannel = $('#chat').data("public-channel");
+    var publishChannel = $("#publish_channel").val();
+    var question = '';
     faye.subscribe("/#{@chat.public_channel}", function(data) {
 
       if(data.isQuestion) {
+        $("section.question").show();
+        question = data.message;
+
+        $("h2#question-title").text(question.title);
+
+        var answersLength = question.answers.length;
+        var answerList = $("ul#possible-answers");
+        answerList.children().remove();
+        for(var i = 0; i < answersLength; i++) {
+          answerList.append("<li>"+question.answers[i].text+"</li>");
+        }
 
       } else {
         $('.no-answer').remove();
@@ -18,7 +61,6 @@
 
     $('#next-question').on('click', function() {
       console.log("retrieving the next question");
-      var publishChannel = $("#publish_channel").val();
 
         faye.publish("/#{@chat.public_channel}", {
           message: $("#message").val(),
@@ -28,5 +70,20 @@
         });
         $("form")[0].reset();
       });
+
       return false;
     });
+
+    $('#start-question').on('click', function() {
+      faye.publish("/#{@chat.public_channel}", {
+        message: exampleQuestion,
+        isQuestion: true,
+
+      });
+
+    $(this).remove();
+
+      return false;
+    });
+  });
+
