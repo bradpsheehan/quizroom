@@ -15,6 +15,12 @@ class Classroom < ActiveRecord::Base
     save
   end
 
+  def members
+    all_users = students.to_a
+    all_users << teacher
+  end
+
+
   def in_session?
     !chat.nil?
   end
