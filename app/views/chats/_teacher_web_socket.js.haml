@@ -5,15 +5,20 @@
     $(document).ready( function() {
       var faye = new Faye.Client('http://localhost:9292/faye');
 
-      var publicChannel = $('#chat').data("public-channel");
-      faye.subscribe("/#{@chat.public_channel}", function(data) {
-        console.log(data);
-        $("#chat").append("<li>"+data.sender+": "+data.message+"</li>");
-      });
+    var publicChannel = $('#chat').data("public-channel");
+    faye.subscribe("/#{@chat.public_channel}", function(data) {
 
-      $("form").on("submit", function() {
+      if(data.isQuestion) {
 
-        var publishChannel = $("#publish_channel").val();
+      } else {
+        $('.no-answer').remove();
+        $("#chat").append("<li>"+data.sender+": "+data.answer+"</li>");
+      }
+    });
+
+    $('#next-question').on('click', function() {
+      console.log("retrieving the next question");
+      var publishChannel = $("#publish_channel").val();
 
         faye.publish("/#{@chat.public_channel}", {
           message: $("#message").val(),
@@ -23,4 +28,5 @@
         });
         $("form")[0].reset();
       });
+      return false;
     });

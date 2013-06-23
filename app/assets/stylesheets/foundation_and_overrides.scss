@@ -1101,6 +1101,12 @@ ul#chat li{
   list-style: none;
   border-bottom: 1px solid black;
   margin-bottom: 15px;
+
+}
+
+ul li.correct_answer {
+  color: green;
+  font-weight: bold;
 }
 
 ul#chat {

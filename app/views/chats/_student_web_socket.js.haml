@@ -8,7 +8,7 @@
     var channel = $('#chat').data("channel");
     faye.subscribe("/#{@chat.public_channel}", function(data) {
       if(data.isQuestion) {
-        $("#chat").append("<li>" + data.sender + ": "+data.message+"</li>");
+        console.log("The next question")
       }else if(data.token === "#{current_user.token}") {
         console.log("Your answer is " + data.answer)
       }
@@ -19,26 +19,21 @@
 
       var publicChannel;
       var selectedAnswer = $(this).find('input[type="radio"]:checked').val();
+      var data;
 
       if(selectedAnswer) {
         $(this).find('input[type="submit"]').remove();
 
         publishChannel = $("#publish_channel").val();
-
-        faye.publish("/#{@chat.public_channel}", {
+        data = {
           message: $("#message").val(),
           sender: "#{current_user.first_name} #{current_user.last_name}",
           token: "#{current_user.token}",
           answer: selectedAnswer
+        }
 
-        });
-        faye.publish("/#{@chat.teacher_channel}", {
-          message: $("#message").val(),
-          sender: "#{current_user.first_name} #{current_user.last_name}",
-          token: "#{current_user.token}",
-          answer: selectedAnswer
-
-        });
+        faye.publish("/#{@chat.public_channel}", data);
+        faye.publish("/#{@chat.teacher_channel}", data);
 
         $("form")[0].reset();
       } else {

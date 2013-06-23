@@ -1,0 +1,22 @@
+%h1 Quiz Name
+
+%h2#question-title Question 1
+%p Bacon ipsum dolor sit amet tri-tip short ribs prosciutto beef ribs, beef turkey ham shoulder flank t-bone. Sirloin cow frankfurter ham hock leberkas turducken. Turkey biltong tail cow filet mignon doner beef ribs?
+
+%h3 Possible Answers:
+%ul
+  %li
+    Tongue swine capicola filet mignon. Short ribs doner pork bresaola.
+  %li
+    Tri-tip tail pancetta, short loin ball tip pork belly swine strip steak. Shankle ham shoulder, short ribs jerky strip steak drumstick bresaola.
+  %li.correct_answer
+    Ground round t-bone tenderloin, flank turkey meatloaf pancetta chuck. Corned beef pork belly leberkas, meatloaf pancetta sausage turducken t-bone beef shankle doner shoulder.
+  %li
+    None of the above
+
+%h3 Student Answers:
+%ul#chat{ data: { "teacher-channel" => @chat.teacher_channel, "public-channel" => @chat.public_channel} }
+  %li.no-answer Noone has submitted an answer.
+
+= link_to "Next Question", "next/question/", {id: "next-question", class: "button"}
+= render 'teacher_web_socket.js'
