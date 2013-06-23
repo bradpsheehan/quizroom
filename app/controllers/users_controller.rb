@@ -6,12 +6,12 @@ class UsersController < ApplicationController
 
   def create
     user_attributes = params[:user]
-    @user = User.create_with_password(user_attributes)
+    @user = Teacher.create_with_password(user_attributes)
 
     if @user.valid?
       flash[:notice] = "Signup Successful!"
       auto_login(@user)
-      redirect_to @user
+      redirect_to user_path(@user)
     else
       flash[:notice] = "Invalid information"
       redirect_to signup_path

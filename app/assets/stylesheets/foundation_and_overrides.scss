@@ -1020,6 +1020,10 @@ $is-input: false;
 
 @import 'foundation';
 
+html > body {
+  background-color: #f2f2f2;
+}
+
 .pull-left {
   float: left;
 }
@@ -1030,6 +1034,10 @@ $is-input: false;
   @include button($padding, $bg, $button-radius, $full-width, $disabled, $is-input);
   background-color: #2ECC71;
 }
+.custom-button-small {
+  @include button($padding, $bg, $button-radius, $disabled, $is-input);
+  background-color: #2ECC71;
+}
 .custom-button:hover {
   background-color: #27AE60;
   -webkit-transition: all 500ms ease;
@@ -1038,15 +1046,13 @@ $is-input: false;
   -o-transition: all 500ms ease;
   transition: all 500ms ease;
 }
-.side-nav {
-  width: 20%;
-  float: left;
-  min-height: 100%;
-  background-color: lightgray;
-  -webkit-box-shadow: 3px -2px 1px -2px gray;
-}
-body, html {
-  height: 100%;
+.custom-button-small:hover {
+  background-color: #27AE60;
+  -webkit-transition: all 500ms ease;
+  -moz-transition: all 500ms ease;
+  -ms-transition: all 500ms ease;
+  -o-transition: all 500ms ease;
+  transition: all 500ms ease;
 }
 .top-bar {
   overflow: hidden;
@@ -1101,5 +1107,44 @@ ul#chat {
   border: 1px solid black;
   padding: 10px;
 }
-
-
+.answer-radio {
+  margin-top: 15px;
+}
+.quiz-question {
+  margin-botton: 80px;
+}
+.side-nav {
+  width: 20%;
+  float: left;
+  background-color: lightgray;
+  -webkit-box-shadow: 3px -2px 1px -2px gray;
+}
+.fixed-left {
+  width: 20%;
+  height: 100%;
+  left: 0;
+  position: fixed;
+}
+#main-content {
+  margin-left: auto;
+  margin-right: auto;
+}
+ul.answer-list {
+  li {
+    list-style-type: none;
+  }
+}
+.ghost-answer {
+  border: 1px solid lightgray;
+  height: 50px;
+  text-align: center;
+  background-color: white;
+  padding: 10px;
+}
+.answer-radio-tagline {
+  padding-top: 15px;
+}
+.remove-field-x {
+  text-align: center;
+  text-shadow: 0px 1px 0px rgba(255,255,255,.3), 0px -1px 0px rgba(0,0,0,.7);
+}

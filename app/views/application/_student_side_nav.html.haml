@@ -2,8 +2,6 @@
   %h2
     Classrooms
     / =link_to "New Classroom", new_classroom_path
-%a.custom-button{href: "#{new_classroom_path}"}
-  New Classroom
 .class-list
   %ul
   -current_user.classrooms.each do |classroom|

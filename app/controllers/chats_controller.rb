@@ -2,10 +2,14 @@ class ChatsController < ApplicationController
 
   respond_to :json, only: :update
 
+  def show
+    @chat = Chat.find_by_id(params[:id])
+  end
+
   def create
 
-    @chat = Chat.create
-    redirect_to classroom_chat_path(@chat, params[:classroom_id])
+    @chat = Chat.create(classroom_id: params[:classroom_id])
+    redirect_to classroom_chat_path(params[:classroom_id], @chat)
 
   end
 

@@ -5,6 +5,9 @@ class ClassroomsController < ApplicationController
 
   def show
     @classroom = Classroom.find_by_id(params[:id])
+    if @classroom.in_session?
+      redirect_to classroom_chat_path(@classroom, @classroom.chat)
+    end
   end
 
   def new
