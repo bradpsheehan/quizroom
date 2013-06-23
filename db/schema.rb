@@ -11,7 +11,15 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130620200618) do
+ActiveRecord::Schema.define(:version => 20130622223748) do
+
+  create_table "answers", :force => true do |t|
+    t.integer  "question_id"
+    t.text     "answer"
+    t.boolean  "correct_answer", :default => false
+    t.datetime "created_at",                        :null => false
+    t.datetime "updated_at",                        :null => false
+  end
 
   create_table "chats", :force => true do |t|
     t.string   "public_channel"
@@ -29,8 +37,8 @@ ActiveRecord::Schema.define(:version => 20130620200618) do
     t.datetime "updated_at", :null => false
   end
 
-  create_table "classrooms_users", :force => true do |t|
-    t.integer "user_id"
+  create_table "classrooms_students", :force => true do |t|
+    t.integer "student_id"
     t.integer "classroom_id"
   end
 
@@ -50,14 +58,19 @@ ActiveRecord::Schema.define(:version => 20130620200618) do
 
   add_index "delayed_jobs", ["priority", "run_at"], :name => "delayed_jobs_priority"
 
-  create_table "messages", :force => true do |t|
-    t.text     "text"
-    t.integer  "user_id"
+  create_table "questions", :force => true do |t|
+    t.integer  "quiz_id"
+    t.text     "question"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end
 
-  add_index "messages", ["user_id"], :name => "index_messages_on_user_id"
+  create_table "quizzes", :force => true do |t|
+    t.integer  "classroom_id"
+    t.string   "name"
+    t.datetime "created_at",   :null => false
+    t.datetime "updated_at",   :null => false
+  end
 
   create_table "users", :force => true do |t|
     t.string   "email"
@@ -67,7 +80,8 @@ ActiveRecord::Schema.define(:version => 20130620200618) do
     t.string   "salt"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.boolean  "teacher",          :default => false
+    t.string   "type"
+    t.string   "token"
   end
 
 end

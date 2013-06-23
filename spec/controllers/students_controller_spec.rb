@@ -4,7 +4,7 @@ describe StudentsController do
   describe "POST #create" do
 
     before do
-      @teacher = create_teacher("fred", "flinstone", "fflinstone@example.com", "")
+      @teacher = create_teacher(first_name: "fred", last_name: "flinstone", email: "fflinstone@example.com")
       controller.stub(:require_login).and_return(true)
       controller.stub(:current_user).and_return(@teacher)
     end

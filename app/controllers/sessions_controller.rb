@@ -7,7 +7,7 @@ class SessionsController < ApplicationController
     user = login(params[:email], params[:password])
     if user
       flash[:notice] = "Logged In!"
-      redirect_to user
+      redirect_to user_path(user)
     else
       flash.now.alert = "Email or passowrd was invalid."
       redirect_to login_path

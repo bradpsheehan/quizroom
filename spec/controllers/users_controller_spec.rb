@@ -24,20 +24,21 @@ describe UsersController do
 
     context "valid user info" do
       it "creates a user" do
-        user = User.new
-        user.stub(:valid?).and_return(true)
-        User.stub(:create_with_password).with(expected_attrs).and_return(user)
+        #user = Teacher.new
+        #user.stub(:valid?).and_return(true)
+        #Teacher.stub(:create_with_password).with(expected_attrs).and_return(user)
         post :create, user: user_attributes
-        expect(response).to redirect_to(user)
+        teacher = Teacher.last
+        expect(response).to redirect_to(user_path(teacher.id))
 
       end
     end
 
     context "invalid user info" do
       it "directs them to the signup page" do
-       
+
         user = stub(:user, valid?: false)
-        User.stub(:create_with_password).with(expected_attrs).and_return(user)
+        Teacher.stub(:create_with_password).with(expected_attrs).and_return(user)
         post :create, user: user_attributes
         expect(response).to redirect_to(signup_path)
       end
