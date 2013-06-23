@@ -9,6 +9,7 @@ class Classroom < ActiveRecord::Base
       user = Student.find_by_id(id)
       if user
         students << user
+        send_classroom_confirmation_email(user)
       end
     end
 
@@ -18,6 +19,15 @@ class Classroom < ActiveRecord::Base
   def members
     all_users = students.to_a
     all_users << teacher
+  end
+
+  def send_classroom_confirmation_email(student)
+    if student.first_name
+      UserMailer.delay.invite_student_to_classroom(student, self)
+    else
+      UserMailer.delay.invite_firsttime_student_to_classroom(student, self)
+    end
+
   end
 
 

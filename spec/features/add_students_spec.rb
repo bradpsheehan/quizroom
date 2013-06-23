@@ -8,11 +8,8 @@ describe 'adding students to a class' do
     teacher_email = "abc@example.com"
     teacher_password = "password"
 
-    teacher = create_teacher("joe", "smith", teacher_email, teacher_password)
+    teacher = create_teacher(first_name: "joe", last_name: "smith", email: teacher_email, password: teacher_password)
     classroom = teacher.classrooms.create!(name: 'English for Rockstars')
-    # Why do we need this?
-    classroom.teacher_id = teacher.id
-    classroom.save!
 
     login_user_post(teacher_email, teacher_password)
 
