@@ -13,10 +13,13 @@
           %h4
             Question
           = text_area_tag :question
-        %h4
-          Answers
-        %p
-        (click button to side of text field to indicate the correct answer)
+        .row
+          .large-2.columns
+            %h4
+              Answers
+          .large-10.columns
+            .answer-radio-tagline
+              (click button to side of text field to indicate the correct answer)
         %ul.answer-list
           %li
             .field
@@ -26,7 +29,8 @@
                 .large-10.columns
                   = text_area_tag :answer
                 .large-1.columns
-                  = link_to "X", "#", class: "remove-link"
+                  .remove-field-x
+                    = link_to "X", "#", class: "remove-link"
           %li
             .field
               .row
@@ -34,14 +38,16 @@
                   = radio_button_tag :option1, ""
                 .large-10.columns
                   .ghost-answer
-                    Add another answer
-                  / = text_area_tag :answer, nil, {disabled: true, placeholder: "Add another answer", class: "ghost-answer"}
+                    %a{href: "#"} Add another answer
                 .large-1.columns
     %hr
-      .actions.custom-button-small.pull-left
-        Add Another Question
-      .actions.custom-button-small.pull-right
-        Save Quiz
+      .actions
+        %a.custom-button-small.pull-left{href: "#"}
+          / Add Another Question
+      .actions
+        %a.custom-button-small.pull-right{href: "#{new_classroom_path}"}
+          Save Quiz
+
         / = submit_tag "save"
 
 
