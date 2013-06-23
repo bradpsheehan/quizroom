@@ -2,10 +2,9 @@ require 'spec_helper'
 
 describe "creates a classroom" do
   it "creates a classroom with a logged in teacher" do
-    u = User.new(first_name: "joe", last_name:"smith", email: "abc@example.com")
+    u = Teacher.new(first_name: "joe", last_name:"smith", email: "abc@example.com")
     u.password = "password"
     u.password_confirmation = "password"
-    u.teacher = true
     u.save!
 
     login_user_post(u.email, "password")
@@ -23,7 +22,7 @@ describe "creates a classroom" do
   end
 
   it "doesn't let an unauthorized user create a classroom" do
-    u = User.new(first_name: "joe", last_name:"smith", email: "blah@example.com")
+    u = Student.new(first_name: "joe", last_name:"smith", email: "blah@example.com")
     u.password = "password"
     u.password_confirmation = "password"
     u.save!

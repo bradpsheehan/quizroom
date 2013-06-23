@@ -1,4 +1,4 @@
-class StudentsController < ApplicationController
+class StudentsController < UsersController
   before_filter :require_login
   before_filter :validate_access_rights
   before_filter :is_teacher, only: [:new, :create]
@@ -7,8 +7,20 @@ class StudentsController < ApplicationController
     @classroom = Classroom.find_by_id(params[:classroom_id])
   end
 
+  def update
+    @user = User.find(params[:id])
+    @user.update_with_password(params[:student])
+    if @user.save
+      flash[:notice] = "Account creation successful"
+      destination = classroom_path(params[:redirect]) || root_path
+      redirect_to destination
+    else
+      render :complete_signup
+    end
+  end
+
   def create
-    @students = User.find_or_create_students(params[:students])
+    @students = Student.find_or_create_students(params[:students])
     classroom = Classroom.find_by_id(params[:classroom_id])
     classroom.add_students(@students)
     if classroom.save
