@@ -40,4 +40,15 @@ class User < ActiveRecord::Base
   def full_name
     "#{first_name} #{last_name}"
   end
+
+  def update_with_password(params)
+    password = params.delete(:password)
+    password_confirmation = params.delete(:password_confirmation)
+    user = User.find_by_email(params[:email])
+    user.update_attributes(params)
+    user.password = password
+    user.password_confirmation = password_confirmation
+    user.save
+    user
+  end
 end

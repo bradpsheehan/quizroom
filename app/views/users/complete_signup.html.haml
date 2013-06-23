@@ -2,7 +2,7 @@
   .large-11.columns
     %h1
       Complete account sign up
-    =form_for @user do |f|
+    =form_for [@class, @user] do |f|
       =f.label 'First Name'
       =f.text_field :first_name
       =f.label 'Last Name'
@@ -13,5 +13,5 @@
       =f.password_field :password
       =f.label 'Password Confirmation'
       =f.password_field :password_confirmation
-      =hidden_field_tag :redirect, @class_id, id: "redirect_to_class"
+      =hidden_field_tag :redirect, @class.id, id: "redirect_to_class"
       =f.submit

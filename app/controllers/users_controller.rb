@@ -20,20 +20,9 @@ class UsersController < ApplicationController
 
   def complete_signup
     @user = User.find(params[:id])
-    @class_id = params[:class_id]
+    @class = Classroom.find(params[:class_id])
   end
 
-  def update
-    @user = User.find(params[:id])
-    @user.update_with_password(params[:user])
-    if @user.save
-      flash[:notice] = "Account creation successful"
-      destination = classroom_path(params[:redirect]) || root_path
-      redirect_to destination
-    else
-      render :complete_signup
-    end
-  end
 
   def show
     @disable_side_nav = true
@@ -41,3 +30,4 @@ class UsersController < ApplicationController
 
 
 end
+
