@@ -19,5 +19,13 @@ class ChatsController < ApplicationController
     respond_with @chat
   end
 
+  def destroy
+    chat = Chat.find(params[:id])
+    chat.destroy
+
+    @classroom = Classroom.find(params[:classroom_id])
+    redirect_to @classroom
+  end
+
 
 end
