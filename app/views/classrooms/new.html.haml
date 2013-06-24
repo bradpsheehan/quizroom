@@ -1,11 +1,10 @@
-.main-body
-  .row
-    .large-8.cloumns
-      %h1
-        Create a New Classroom
-      = form_tag classrooms_path do
-        .field
-          = label_tag :class_name
-          = text_field_tag 'class_name'
-        .actions
-          = submit_tag "create"
+.row
+  .large-8.cloumns
+    %h1
+      Create a New Classroom
+    = form_tag classrooms_path do
+      .field
+        = label_tag :class_name
+        = text_field_tag 'class_name'
+      .actions
+        = submit_tag "create"

@@ -1,10 +1,44 @@
-.main-body
-  .row
-    .large-11.columns
-      %h1
-        = @classroom.name
-      -if current_user.teacher?
-        = link_to "Add Students", new_classroom_student_path(@classroom.id)
-        = button_to "start quiz", start_quiz_path(classroom_id: @classroom.id)
-      -else
-        Students will see something...
+.row
+  .large-11.columns
+    %h1
+      = @classroom.name
+    -if current_user.teacher?
+      .row
+        .large-12.columns
+          .row
+            .large-2.columns
+              %h3
+                Students
+            %form#search-bar{:action => "/students", :method => "get"}
+              .large-7.columns
+                %input#speech-input-field{:autocomplete => "off", "data-provide" => "typeahead", "data-source" => @search_terms, :name => "q", :onwebkitspeechchange => "onChange()", :placeholder => "search for students", :type => "text", "x-webkit-speech" => ""}/
+              .large-3.columns
+              %button{:name => "Search", :type => "submit"} Search
+          .row
+            .large-12.columns
+              .circle
+              .circle
+              .circle
+              .circle
+              .circle
+              .circle
+              .circle
+              .circle
+          = form_tag classroom_students_path(@classroom.id) do
+            .field
+              = hidden_field_tag :classroom_id, @classroom.id
+              = label_tag :add_students
+              = text_area_tag :students
+            .actions
+              = submit_tag "Add Students", class: "custom-button-small"
+      %hr
+      %h3
+        Quizzes
+      .row
+        .large-9.columns
+          %a.custom-button-small{href: "#{new_quiz_path}"}
+            Create a Quiz
+        .large-3.columns
+          = button_to "start quiz", start_quiz_path(classroom_id: @classroom.id), class: "custom-button-small pull-right"
+    -else
+      Students will see something...
