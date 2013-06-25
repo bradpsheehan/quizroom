@@ -1,5 +1,6 @@
 = content_for :extra_scripts do
   = javascript_include_tag "http://localhost:9292/faye.js"
+  = javascript_include_tag "socket"
 
   :javascript
     var exampleQuestion = {
@@ -32,27 +33,25 @@
     var exampleStudentQuestion = {
       quizName: "A Quiz",
       id: 5,
+      submitPath: "http://quizzical.com/quizzes/1/questions/1/submissions",
       title: "Bacon ipsum dolor sit amet tri-tip short ribs prosciutto beef ribs, beef turkey ham shoulder flank t-bone. Sirloin cow frankfurter ham hock leberkas turducken. Turkey biltong tail cow filet mignon doner beef ribs?",
       answers: [
         {
           id: 1,
-          text: "Tongue swine capicola filet mignon. Short ribs doner pork bresaola.",
-          submitPath: "path_to_submit_this_answer"
+          text: "Tongue swine capicola filet mignon. Short ribs doner pork bresaola."
         },
         {
           id: 2,
           text: "Tongue swine capicola filet mignon. Short ribs doner pork bresaola.Tri-tip tail pancetta, short loin ball tip pork belly swine strip steak. Shankle ham shoulder, short ribs jerky strip steak drumstick bresaola.",
-          submitPath: "path_to_submit_this_answer",
+          correctAnswer: true
         },
         {
           id: 3,
-          text: "Ground round t-bone tenderloin, flank turkey meatloaf pancetta chuck. Corned beef pork belly leberkas, meatloaf pancetta sausage turducken t-bone beef shankle doner shoulder.",
-          submitPath: "path_to_submit_this_answer"
+          text: "Ground round t-bone tenderloin, flank turkey meatloaf pancetta chuck. Corned beef pork belly leberkas, meatloaf pancetta sausage turducken t-bone beef shankle doner shoulder."
         },
         {
           id: 4,
-          text: "None of the above",
-          submitPath: "path_to_submit_this_answer"
+          text: "None of the above"
         },
       ],
     };
@@ -60,15 +59,15 @@
     $(document).ready( function() {
       $("section.question").hide();
 
-      var faye = new Faye.Client('http://localhost:9292/faye');
+      var socket = Socket('http://localhost:9292/faye');
       var publicChannel = $('#chat').data("public-channel");
       var publishChannel = $("#publish_channel").val();
       var question = '';
-      faye.subscribe("/#{@chat.public_channel}", function(data) {
+      socket.subscribe("/#{@chat.public_channel}", function(data) {
 
         if(data.isQuestion) {
           $("section.question").show();
-          question = data.message;
+          question = data.question;
 
           $("h2#question-title").text(question.title);
 
@@ -92,8 +91,8 @@
 
       $('#next-question').on('click', function() {
 
-        faye.publish("/#{@chat.public_channel}", {
-          message: $("#message").val(),
+        socket.publish("/#{@chat.public_channel}", {
+          question: $("#message").val(),
           isQuestion: true,
           sender: "Question"
         });
@@ -104,8 +103,8 @@
       });
 
       $('#start-question').on('click', function() {
-        faye.publish("/#{@chat.public_channel}", {
-          message: exampleQuestion,
+        socket.publish("/#{@chat.public_channel}", {
+          question: exampleStudentQuestion,
           isQuestion: true,
 
         });

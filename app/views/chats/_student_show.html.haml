@@ -2,12 +2,10 @@
 
 %section.question
   /%h2#question-title
-  %h2#question-title Bacon ipsum dolor sit amet tri-tip short ribs prosciutto beef ribs, beef turkey ham shoulder flank t-bone. Sirloin cow frankfurter ham hock leberkas turducken. Turkey biltong tail cow filet mignon doner beef ribs?
+  %h2#question-title
 
   %p.selected_answer
-  = form_tag "path_to_answer_quiz", id:"answer" do
-
-    = submit_tag "Submit", class: "button"
+  = form_tag "path_to_answer_quiz", id:"answer"
 
   = render 'student_web_socket.js'
 

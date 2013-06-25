@@ -1,76 +1,95 @@
 = content_for :extra_scripts do
   = javascript_include_tag "http://localhost:9292/faye.js"
   = javascript_include_tag "handlebars"
+  = javascript_include_tag "socket"
+  = javascript_include_tag "template_builder"
 
   :javascript
 
-    var questionTemplate = "<div class='field'> \
-          <label for='answer_{{id}}'><input id='answer_{{id}}' name='answer' type='radio' value={{id}} /> \
-          <span class='text'>{{text}}</span>\
-          </label> \
-            </div>";
-
-    var questionInput = function(data) {
-      template = Handlebars.compile(questionTemplate);
-      return template(data);
-
-    };
-
-
     $(document).ready( function() {
-      var faye = new Faye.Client('http://localhost:9292/faye');
+      var socket = Socket('http://localhost:9292/faye');
       var channel = $('#chat').data("channel");
       var question = '';
 
-      $('section.question').hide();
+      var FormBuilder = function(data) {
+        var that = {};
 
-      faye.subscribe("/#{@chat.public_channel}", function(data) {
-        if(data.isQuestion) {
-          $('section.question').show();
-          question = data.message;
-          var answersLength = question.answers.length;
-          var answerForm = $("form#answer");
-          answerForm.children("input[type='radio']").remove();
-          for(var i = answersLength-1; i >= 0; i--) {
-            answerForm.prepend(questionInput(question.answers[i]));
-          }
+        var questionTemplate = "<div class='field'> \
+              <label for='answer_{{id}}'><input id='answer_{{id}}' name='answer' type='radio' value={{id}} /> \
+              <span class='text'>{{text}}</span>\
+              </label> \
+                </div>";
 
-
-          $("h2#question-title").text(question.title);
-        }else if(data.token === "#{current_user.token}") {
-          console.log("Your answer is " + data.answer)
+        var question = data.question;
+        that.isQuestion = function() {
+          return data.isQuestion == true;
         }
 
+        that.updateAnswers = function(answerForm) {
+          var answersLength = question.answers.length;
+          answerForm.children("input[type='radio']").remove();
+          for(var i = answersLength-1; i >= 0; i--) {
+            answerForm.prepend(templateBuilder(questionTemplate, question.answers[i]));
+          }
+          answerForm.children("input[type='submit']").show().attr("disabled", true);
+          answerForm.append("<input class='button' type='submit' name='commit' value='Submit' disabled='disabled'>");
+
+        };
+
+        that.updateTitle = function(title) {
+          title.text(data.question.title);
+        };
+
+
+        return that;
+
+      };
+
+      $('section.question').hide();
+
+      socket.subscribe("/#{@chat.public_channel}", function(data) {
+        var formBuilder = FormBuilder(data);
+        if(formBuilder.isQuestion()) {
+          $('section.question').show();
+          formBuilder.updateAnswers($("form#answer"));
+          formBuilder.updateTitle($("h2#question-title"));
+        } else {
+          console.log("this is not question");
+          $('p.selected_answer').text(data.answer.text);
+        }
       });
+
+      var selectedAnswer;
+
+
+      $("form#answer").on("click", "input[type='radio']", function() {
+        $('form#answer input[type="submit"]').attr("disabled", false);
+        selectedAnswer = $(this).val();
+      });
+
 
       $("form#answer").on("submit", function() {
 
         var publicChannel;
-        var selectedAnswer = $(this).find('input[type="radio"]:checked').val();
-        var selectedText = $(this).find('input[type="radio"]:checked').siblings('.text').text();
         var data;
 
-        if(selectedAnswer) {
-          //$(this).find('input[type="submit"]').remove();
+        $(this).children().remove();
 
-          $(this).children().remove();
-          $('p.selected_answer').text(selectedText);
-
-          publishChannel = $("#publish_channel").val();
-          data = {
-            message: $("#message").val(),
-            sender: "#{current_user.first_name} #{current_user.last_name}",
-            token: "#{current_user.token}",
-            answer: selectedAnswer
-          }
-
-          faye.publish("/#{@chat.public_channel}", data);
-          faye.publish("/#{@chat.teacher_channel}", data);
-
-          $("form")[0].reset();
-        } else {
-          console.log("You must select an answer before submitting");
+        data = {
+          question: $("#message").val(),
+          sender: "#{current_user.first_name} #{current_user.last_name}",
+          token: "#{current_user.token}",
+          answer: {
+            id: selectedAnswer,
+            text: "blah blah blah"
+            }
         }
+
+        socket.publish("/#{@chat.public_channel}", data);
+        socket.publish("/#{@chat.teacher_channel}", data);
+
+
+        $("form")[0].reset();
         return false;
       });
     });
