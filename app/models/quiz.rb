@@ -5,4 +5,6 @@ class Quiz < ActiveRecord::Base
 
   accepts_nested_attributes_for :questions
 
+  attr_accessible :name
+
 end

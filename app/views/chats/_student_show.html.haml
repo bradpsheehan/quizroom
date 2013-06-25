@@ -1,11 +1,15 @@
 %h1 Quiz Name
 
 %section.question
-  /%h2#question-title
   %h2#question-title
 
   %p.selected_answer
-  = form_tag "path_to_answer_quiz", id:"answer"
+  = form_tag "#", id:"answer"
 
   = render 'student_web_socket.js'
 
+  %script.template{type: "text/x-handlebars-template"}
+    .field
+      %label{for: "answer_{{id}}"}
+        %input{id: "answer_{{id}}", name: "answer", type:"radio", value:"{{id}}"}
+        %span.text {{text}}

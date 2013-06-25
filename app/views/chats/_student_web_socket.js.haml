@@ -14,15 +14,15 @@
       var FormBuilder = function(data) {
         var that = {};
 
-        var questionTemplate = "<div class='field'> \
-              <label for='answer_{{id}}'><input id='answer_{{id}}' name='answer' type='radio' value={{id}} /> \
-              <span class='text'>{{text}}</span>\
-              </label> \
-                </div>";
+        var questionTemplate = $('.template').text();
 
         var question = data.question;
         that.isQuestion = function() {
           return data.isQuestion == true;
+        }
+
+        that.updateAction = function(answerForm) {
+          answerForm.attr('action', question.submitPath);
         }
 
         that.updateAnswers = function(answerForm) {
@@ -36,10 +36,14 @@
 
         };
 
+        that.updateForm = function(answerForm) {
+          this.updateAction(answerForm);
+          this.updateAnswers(answerForm);
+        }
+
         that.updateTitle = function(title) {
           title.text(data.question.title);
         };
-
 
         return that;
 
@@ -51,7 +55,8 @@
         var formBuilder = FormBuilder(data);
         if(formBuilder.isQuestion()) {
           $('section.question').show();
-          formBuilder.updateAnswers($("form#answer"));
+          //formBuilder.updateAnswers($("form#answer"));
+          formBuilder.updateForm($("form#answer"));
           formBuilder.updateTitle($("h2#question-title"));
         } else {
           console.log("this is not question");

@@ -5,4 +5,6 @@ class Question < ActiveRecord::Base
 
   accepts_nested_attributes_for :answers
 
+  attr_accessible :question
+
 end
