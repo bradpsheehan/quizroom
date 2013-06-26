@@ -1,5 +1,5 @@
 .row
-  #main-content.large-11.columns
+  .main-content.large-11.columns
     - if current_user.teacher?
       %ul#chat{ data: { "teacher-channel" => @chat.teacher_channel, "public-channel" => @chat.public_channel} }
     - else

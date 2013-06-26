@@ -8,6 +8,7 @@ class QuizzesController < ApplicationController
 
   def edit
     @quiz = Quiz.find_by_id(params[:id])
+    @question = Question.new
   end
 
   def create
