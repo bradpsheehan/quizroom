@@ -1,5 +1,7 @@
 class Quiz < ActiveRecord::Base
 
+  attr_accessible :teacher_id, :name
+
   belongs_to :teacher
   has_many :questions
 

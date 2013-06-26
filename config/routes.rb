@@ -7,7 +7,11 @@ Quizroom::Application.routes.draw do
     resources :students
     resources :chats
   end
-  resources :quizzes
+  resources :quizzes do
+    resources :questions do
+      resources :answers
+    end
+  end
 
   get 'signup' => 'users#new'
   get 'login' => 'sessions#new', as: 'login'

@@ -1,4 +1,4 @@
-// Required global settings and mixins for Foundation
+  // Required global settings and mixins for Foundation
 @import "foundation/foundation-global";
 
 // Settings file to override Foundation variables
@@ -1131,7 +1131,7 @@ ul#chat {
   left: 0;
   position: fixed;
 }
-#main-content {
+.main-content {
   margin-left: auto;
   margin-right: auto;
 }
@@ -1153,4 +1153,49 @@ ul.answer-list {
 .remove-field-x {
   text-align: center;
   text-shadow: 0px 1px 0px rgba(255,255,255,.3), 0px -1px 0px rgba(0,0,0,.7);
+}
+.circle {
+  display: inline-block;
+  width: 75px;
+  height: 75px;
+  margin: 1em auto;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center center;
+  -webkit-border-radius: 99em;
+  -moz-border-radius: 99em;
+  border-radius: 99em;
+  border: 3px solid #27AE60;
+  box-shadow: 0 3px 2px rgba(0, 0, 0, 0.3);
+  margin-right: 25px;
+}
+.add-students-btn {
+  margin-top: 18px;
+}
+.classroom-header {
+  margin-bottom: 5%;
+}
+.student-finder-btn {
+  height: 35px;
+  border-radius: 30px;
+  padding: 10px;
+}
+.student-search-input {
+  border-radius: 20px;
+}
+.search-bar {
+  padding-top: 20px
+}
+form {
+  margin: 0px;
+}
+.dashborad-widget-header {
+  background-color: #4d4d4d;
+  border-radius: 5px;
+  margin-bottom: 40px;
+  margin-top: 70px;
+}
+.header-text h2 {
+  margin: 10px;
+  color: whitesmoke;
 }
