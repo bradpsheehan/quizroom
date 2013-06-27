@@ -11,6 +11,7 @@ class QuestionsController < ApplicationController
 
   def show
     @question = Question.find(params[:id])
-    respond_with @question
+    response = { question: @question, answers: @question.answers }
+    respond_with response
   end
 end

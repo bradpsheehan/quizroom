@@ -15,7 +15,8 @@ describe 'adding students to a class' do
 
     visit classroom_path(classroom)
 
-    click_link('Add Students')
+    #save_and_open_page
+    click_on('Add Students')
     fill_in('students', with: 'student1@example.com, student2@example.com')
 
     click_button('Add Students')

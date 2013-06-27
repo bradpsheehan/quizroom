@@ -16,7 +16,7 @@
 
         var questionTemplate = $('.template').text();
 
-        var question = data.question;
+        var question = data.question.question;
         that.isQuestion = function() {
           return data.isQuestion == true;
         }
@@ -26,10 +26,12 @@
         }
 
         that.updateAnswers = function(answerForm) {
-          var answersLength = question.answers.length;
+          var answersLength = data.answers.length;
           answerForm.children("input[type='radio']").remove();
           for(var i = answersLength-1; i >= 0; i--) {
-            answerForm.prepend(templateBuilder(questionTemplate, question.answers[i]));
+            var currentAnswer = data.answers[i];
+            var templateData = { id: currentAnswer.id, text: currentAnswer.answer };
+            answerForm.prepend(templateBuilder(questionTemplate, templateData));
           }
           answerForm.children("input[type='submit']").show().attr("disabled", true);
           answerForm.append("<input class='button' type='submit' name='commit' value='Submit' disabled='disabled'>");
@@ -42,7 +44,7 @@
         }
 
         that.updateTitle = function(title) {
-          title.text(data.question.title);
+          title.text(data.question.question);
         };
 
         return that;

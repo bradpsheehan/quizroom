@@ -58,6 +58,15 @@ ActiveRecord::Schema.define(:version => 20130624180809) do
 
   add_index "delayed_jobs", ["priority", "run_at"], :name => "delayed_jobs_priority"
 
+  create_table "messages", :force => true do |t|
+    t.text     "text"
+    t.integer  "user_id"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  add_index "messages", ["user_id"], :name => "index_messages_on_user_id"
+
   create_table "questions", :force => true do |t|
     t.integer  "quiz_id"
     t.text     "question"

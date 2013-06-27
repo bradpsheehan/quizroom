@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe "teacher posts a message", js: true do
 
-  it "open a chat with a quiz" do
+  it "opens a chat with a quiz" do
     teacher = create_teacher
     quiz = create_quiz_with_question_and_answer(teacher)
     question = quiz.questions.first
@@ -25,4 +25,5 @@ describe "teacher posts a message", js: true do
 
   end
 end
+
 

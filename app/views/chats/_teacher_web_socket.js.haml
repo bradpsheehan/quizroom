@@ -62,6 +62,7 @@
       var publicChannel = $('#chat').data("public-channel");
       var publishChannel = $("#publish_channel").val();
       var question = '';
+
       socket.subscribe("/#{@chat.public_channel}", function(data) {
 
         if(data.isQuestion) {
@@ -70,15 +71,17 @@
 
           $("h2#question-title").text(question.question);
 
-          var answersLength = question.answers.length;
+          var answersLength = data.answers.length;
           var answerList = $("ul#possible-answers");
           answerList.children().remove();
 
           for(var i = 0; i < answersLength; i++) {
-            if(question.answers[i].correctAnswer){
-              answerList.append("<li class='correct_answer'>"+question.answers[i].answer+"</li>");
+            var currentAnswer = data.answers[i];
+
+            if(currentAnswer.correctAnswer){
+              answerList.append("<li class='correct_answer'>"+ currentAnswer.answer+"</li>");
             } else {
-              answerList.append("<li>"+question.answers[i].answer+"</li>");
+              answerList.append("<li>"+currentAnswer.answer+"</li>");
             }
           }
 
@@ -103,16 +106,10 @@
 
       $('#start-question').on('click', function() {
         //get the first question
-        $.get("#{quiz_question_path(@quiz, @quiz.questions.first)}", function(question) {
-          console.log(question);
-          question.isQuestion = true
-          question.answers = []
+        $.get("#{quiz_question_path(@quiz, @quiz.questions.first)}", function(data) {
+          console.log(data);
+          data.isQuestion = true;
           socket.publish("/#{@chat.public_channel}",data);
-        //socket.publish("/#{@chat.public_channel}", {
-         // question: exampleStudentQuestion,
-          //isQuestion: true,
-
-        //});
         });
 
         $(this).remove();
