@@ -9,4 +9,8 @@ class QuestionsController < ApplicationController
     respond_with @question, location: quiz_question_path(@question.quiz_id, @question)
   end
 
+  def show
+    @question = Question.find(params[:id])
+    respond_with @question
+  end
 end

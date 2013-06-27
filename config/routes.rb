@@ -20,5 +20,4 @@ Quizroom::Application.routes.draw do
   get 'add_students' => 'students#new'
   post 'start_quiz' => 'chats#create'
   post 'submit_answer' => 'submissions#create'
-
 end

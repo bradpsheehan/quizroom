@@ -53,7 +53,7 @@
               %h3
                 = quiz.name
             .large-3.columns
-              = button_to "open", start_quiz_path(classroom_id: @classroom.id), class: "custom-button-small pull-right"
+              = button_to "open", start_quiz_path(classroom_id: @classroom.id, quiz_id: quiz.id), class: "custom-button-small pull-right"
       .dashborad-widget-header
         .header-text
           %h2
