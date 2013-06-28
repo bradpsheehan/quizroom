@@ -12,13 +12,13 @@
 # It's strongly recommended to check this file into your version control system.
 
 ActiveRecord::Schema.define(:version => 20130701155310) do
+ActiveRecord::Schema.define(:version => 20130626214355) do
 
   create_table "answers", :force => true do |t|
     t.integer  "question_id"
     t.text     "answer"
-    t.boolean  "correct_answer", :default => false
-    t.datetime "created_at",                        :null => false
-    t.datetime "updated_at",                        :null => false
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
   end
 
   create_table "chats", :force => true do |t|
@@ -62,9 +62,15 @@ ActiveRecord::Schema.define(:version => 20130701155310) do
   create_table "questions", :force => true do |t|
     t.integer  "quiz_id"
     t.text     "question"
+<<<<<<< HEAD
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
     t.integer  "position"
+=======
+    t.datetime "created_at",        :null => false
+    t.datetime "updated_at",        :null => false
+    t.integer  "correct_answer_id"
+>>>>>>> Add correct answer column to questions.  Remove correct answer column from answers
   end
 
   create_table "quizzes", :force => true do |t|

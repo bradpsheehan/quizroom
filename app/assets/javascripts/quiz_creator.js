@@ -1,7 +1,11 @@
 var success = function(data){
-  // console.log(data)
-  // $('.answers').show();
+  console.log(data)
   $('#question_question_id').val(data.id);
+  //Set answer id as an attribute in the dom
+  $("ul.textarea").attr("data-answerid", data.id)
+  //set question_id variable
+  //post an update to the question
+
 };
 
 $(document).ready( function(){
@@ -15,12 +19,19 @@ $(document).ready( function(){
     return false;
   });
 
+  $('#option1').on('click', function(){
+    markChecked($(this).val());
+  });
+
   $('form').on('click', '.remove-link', function() {
     removeAnswer($(this).closest('li'));
     return false;
   });
 
-  // $('.answers').hide();
+  $('ul.answer-list').on('click', 'input[type="radio"]', function(){
+
+  });
+
   $('#question_question').on('focusout', function(){
     var quiz_id = $('#question_quiz_id').val();
     var question = $('#question_question').val();
@@ -29,16 +40,19 @@ $(document).ready( function(){
   });
 
   $('#question_question').on('focusout', function(){
-    $('section.answers').show()
+    $('section.answers').show();
   });
 
+
   $('ul.answer-list').on('focusout', 'li', function(){
-    alert('blah');
     var quiz_id = $('#question_quiz_id').val();
     var question_id = $('#question_question_id').val();
     var text = $(this).find('textarea').val();
-    var correctAnswer = $(this).find('input:checked').size() != 0;
-    var data = {answer: text, correctAnswer: correctAnswer}
+
+    // var correctAnswer = $("input:checked").parent().next().find("textarea").val();
+    // var currentAnswerIsCorrectAnswer = (text === correctAnswer);
+
+    var data = {answer: text}
     console.log(data);
     $.post('/quizzes/'+quiz_id+'/questions/'+question_id+'/answers', data)
     return false;
@@ -47,13 +61,13 @@ $(document).ready( function(){
 
 
 var addNewAnswer = function(parent, i){
-  console.log('add another answer');
+  // console.log('add another answer');
 
   var thingToAppend = "<li> \
                         <div class=\"field\"> \
                           <div class=\"row\"> \
                             <div class=\"large-1 columns answer-radio\"> \
-                              <input id=\"option1_\" name=\"option1\" type=\"radio\" value=\"\"> \
+                              <input id=\"option1\" name=\"option1\" type=\"radio\" value=\"\"> \
                             </div> \
                             <div class=\"large-10 columns\"> \
                               <textarea name=\"answers[answer" + i + "]\"></textarea> \
@@ -71,6 +85,6 @@ var addNewAnswer = function(parent, i){
 };
 
 var removeAnswer = function(thingToRemove){
-  console.log('remove this answer')
+  // console.log('remove this answer')
   thingToRemove.remove();
 };
