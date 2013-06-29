@@ -3,6 +3,7 @@ Quizroom::Application.routes.draw do
 
   resources :users
   resources :sessions
+  resources :submissions, only: [:create, :show]
   resources :classrooms do
     resources :students
     resources :chats

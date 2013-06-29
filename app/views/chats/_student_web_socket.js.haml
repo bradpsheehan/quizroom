@@ -54,8 +54,8 @@
       $('section.question').hide();
 
       socket.subscribe("/#{@chat.public_channel}", function(data) {
-        var formBuilder = FormBuilder(data);
-        if(formBuilder.isQuestion()) {
+        if(data.isQuestion) {
+          var formBuilder = FormBuilder(data);
           $('section.question').show();
           //formBuilder.updateAnswers($("form#answer"));
           formBuilder.updateForm($("form#answer"));
@@ -94,6 +94,14 @@
 
         socket.publish("/#{@chat.public_channel}", data);
         socket.publish("/#{@chat.teacher_channel}", data);
+
+        var submission_data = {
+          answer_id: selectedAnswer
+        };
+
+        $.post("#{submissions_path}", submission_data, function(){
+          console.log("woot?");  
+        });
 
 
         $("form")[0].reset();

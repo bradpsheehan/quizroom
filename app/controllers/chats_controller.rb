@@ -4,13 +4,13 @@ class ChatsController < ApplicationController
 
   def show
     @chat = Chat.find_by_id(params[:id])
-    @quiz = Quiz.find(params[:quiz_id]) if params[:quiz_id]
+    @quiz = @chat.quiz
   end
 
   def create
 
-    @chat = Chat.create(classroom_id: params[:classroom_id])
-    redirect_to classroom_chat_path(params[:classroom_id], @chat, quiz_id: params[:quiz_id])
+    @chat = Chat.create(classroom_id: params[:classroom_id], quiz_id: params[:quiz_id])
+    redirect_to classroom_chat_path(params[:classroom_id], @chat)
 
   end
 
