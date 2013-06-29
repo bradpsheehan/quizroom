@@ -4,7 +4,7 @@ class ChatsController < ApplicationController
 
   def show
     @chat = Chat.find_by_id(params[:id])
-    @quiz = Quiz.find(params[:quiz_id])
+    @quiz = Quiz.find(params[:quiz_id]) if params[:quiz_id]
   end
 
   def create

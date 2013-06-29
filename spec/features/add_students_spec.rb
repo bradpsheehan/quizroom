@@ -16,10 +16,8 @@ describe 'adding students to a class' do
     visit classroom_path(classroom)
 
     #save_and_open_page
-    click_on('Add Students')
     fill_in('students', with: 'student1@example.com, student2@example.com')
-
-    click_button('Add Students')
+    click_on('Add Students')
 
     expect(page).to have_content('student1@example.com')
     expect(page).to have_content('student2@example.com')
