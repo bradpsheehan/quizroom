@@ -16,3 +16,6 @@
 
 #Ignore coverage info
 /coverage
+
+#Ignore vim temp files
+*.swp
