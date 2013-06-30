@@ -1,0 +1,102 @@
+= content_for :extra_scripts do
+  = javascript_include_tag "http://localhost:9292/faye.js"
+  = javascript_include_tag "handlebars"
+  = javascript_include_tag "socket"
+  = javascript_include_tag "template_builder"
+
+  :javascript
+
+    $(document).ready( function() {
+      var selectedAnswer, selectedAnswerText,
+      socket = Socket('http://localhost:9292/faye'),
+      channel = $('#chat').data("channel"),
+      question = '';
+
+
+      var FormBuilder = function(data) {
+        var that = {},
+            questionTemplate = $('.template').text();
+            question = data.question.question;
+
+        that.isQuestion = function() {
+          return data.isQuestion == true;
+        }
+
+        that.updateAction = function(answerForm) {
+          answerForm.attr('action', question.submitPath);
+        }
+
+        that.updateAnswers = function(answerForm) {
+          var i, currentAnswer, temlplateData,
+              answersLength = data.answers.length;
+          answerForm.children("input[type='radio']").remove();
+          for(i = answersLength-1; i >= 0; i--) {
+            currentAnswer = data.answers[i];
+            templateData = { id: currentAnswer.id, text: currentAnswer.answer };
+            answerForm.prepend(templateBuilder(questionTemplate, templateData));
+          }
+          answerForm.children("input[type='submit']").show().attr("disabled", true);
+          answerForm.append("<input class='button' type='submit' name='commit' value='Submit' disabled='disabled'>");
+
+        };
+
+        that.updateForm = function(answerForm) {
+          this.updateAction(answerForm);
+          this.updateAnswers(answerForm);
+        }
+
+        that.updateTitle = function(title) {
+          title.text(data.question.question);
+        };
+
+        return that;
+
+      };
+
+      $('section.question').hide();
+
+      socket.subscribe("/#{@chat.public_channel}", function(data) {
+        if(data.isQuestion) {
+          var formBuilder = FormBuilder(data);
+          $('section.question').show();
+          formBuilder.updateForm($("form#answer"));
+          formBuilder.updateTitle($("h2#question-title"));
+        } else {
+          $('p.selected_answer').text(data.answer.text);
+        }
+      });
+
+      $("form#answer").on("click", "input[type='radio']", function() {
+        $('form#answer input[type="submit"]').attr("disabled", false);
+        selectedAnswer = $(this).val();
+        selectedAnswerText = $(this).siblings()[0].innerText; 
+      });
+
+      $("form#answer").on("submit", function() {
+
+        var publicChannel, data, submission_data;
+
+        submission_data = {
+          answer_id: selectedAnswer
+        };
+
+        $(this).children().remove();
+
+        data = {
+          question: $("#message").val(),
+          sender: "#{current_user.first_name} #{current_user.last_name}",
+          token: "#{current_user.token}",
+          answer: {
+            id: selectedAnswer,
+            text: selectedAnswerText
+
+            }
+        }
+
+        socket.publish("/#{@chat.public_channel}", data);
+        socket.publish("/#{@chat.teacher_channel}", data);
+
+        $("form")[0].reset();
+        return false;
+      });
+    });

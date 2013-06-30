@@ -16,4 +16,4 @@
   = link_to "Next Question", "#", {id: "next-question", class: "button"}
   = link_to "Close Question", "#", {id: "close-question", class: "button"}
 = button_to "Close Classroom", classroom_chat_path(@chat.classroom_id, @chat), {method: :delete}
-= render 'teacher_web_socket.js'
+= render 'teacher_web_socket'
