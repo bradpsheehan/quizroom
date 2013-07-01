@@ -24,6 +24,7 @@ group :test do
   gem 'fakeweb', '~> 1.3.0'
   gem 'selenium-webdriver'
   gem 'database_cleaner'
+  gem 'jasmine'
 end
 
 group :development do
