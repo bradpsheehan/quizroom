@@ -1,19 +1,23 @@
 require 'spec_helper'
 
-describe "teacher creates a quiz" do
+describe "teacher creates a quiz", js: true do
 
-  xit "creates one question using the new quiz form" do
-    visit root_path
-    click_link "signup"
-    fill_in 'user_first_name', :with => "joe"
-    fill_in 'user_last_name', :with => "smith"
-    fill_in 'user_email', :with => "abc@example.com"
-    fill_in 'user_password', :with => "password"
-    fill_in 'user_password_confirmation', :with => "password"
-    click_button 'Create User'
+  it "creates one question using the new quiz form" do
+    teacher = Teacher.new(first_name: "Teach", last_name: "Name", email:"abc@example.com")
+    teacher.password = "1234"
+    teacher.password_confirmation = "1234"
+    teacher.save
+    classroom = Classroom.create!(name: "Class1", teacher_id: teacher.id)
+    visit login_path
 
-    visit new_quiz_path
+    fill_in 'email', :with => "abc@example.com"
+    fill_in 'password', :with => "1234"
+    click_button 'login'
+
+    visit classroom_path(classroom)
+
     fill_in 'quiz_name', :with => "English Final Exam"
+    click_button 'create quiz'
     fill_in 'question', :with => "What is a noun?"
     fill_in 'answer', :with => "Answer1a"
     click_on "Add another answer"

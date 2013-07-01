@@ -4,8 +4,7 @@ class AnswersController < ApplicationController
 
   def create
     @answer = Answer.create(question_id: params[:question_id],
-                            answer: params[:answer],
-                            correct_answer: params[:correct_answer])
+                            answer: params[:answer])
     respond_with @answer, location: quiz_question_answer_path(@answer.question.quiz_id, @answer.question, @answer)
   end
 
