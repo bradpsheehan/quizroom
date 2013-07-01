@@ -1,11 +1,48 @@
-var success = function(data){
-  console.log(data)
+// use this method after the question has been created
+var succesfulQuestionCreateHandler = function(data){
+  console.log(data);
   $('#question_question_id').val(data.id);
-  //Set answer id as an attribute in the dom
-  $("ul.textarea").attr("data-answerid", data.id)
-  //set question_id variable
-  //post an update to the question
+};
 
+// var successfulAnswerCreateHandler = function(data){
+// };
+
+//use this method to update the question
+var questionUpdateHandler = function(event){
+  console.log(event);
+  // debugger;
+  var correct_answer_id = $(event.target)
+                                  .parent()
+                                  .parent()
+                                  .find('textarea')
+                                  .attr('id');
+  var question_id = $('#question_question_id').val();
+  var quiz_id = $('#question_quiz_id').val();
+
+  var data = {question: {correct_answer_id: correct_answer_id}};
+  // $.post('/quizzes/'+quiz_id+'/questions/'+question_id, data, function(){
+  //   console.log("updated!")
+  // });
+  $.ajax({
+    type: "PUT",
+    url: '/quizzes/'+quiz_id+'/questions/'+question_id,
+    data: data,
+    success: function(){
+    console.log("updated!")}
+  });
+};
+
+var answerCreateHandler = function(){
+  var quiz_id = $('#question_quiz_id').val();
+  var question_id = $('#question_question_id').val();
+  var text_area = $(this).find('textarea');
+  var text = $(this).find('textarea').val();
+  var data = {answer: text}
+  console.log(data);
+  $.post('/quizzes/'+quiz_id+'/questions/'+question_id+'/answers', data, function(data){
+    text_area.attr('id', data.id);
+  });
+  return false;
 };
 
 $(document).ready( function(){
@@ -28,15 +65,13 @@ $(document).ready( function(){
     return false;
   });
 
-  $('ul.answer-list').on('click', 'input[type="radio"]', function(){
-
-  });
+  $('ul.answer-list').on('click', 'input[type="radio"]', questionUpdateHandler);
 
   $('#question_question').on('focusout', function(){
     var quiz_id = $('#question_quiz_id').val();
     var question = $('#question_question').val();
     var data = {quiz_id: quiz_id, question: {question: question}}
-    $.post('/quizzes/'+quiz_id+'/questions', data, success);
+    $.post('/quizzes/'+quiz_id+'/questions', data, succesfulQuestionCreateHandler);
   });
 
   $('#question_question').on('focusout', function(){
@@ -44,19 +79,7 @@ $(document).ready( function(){
   });
 
 
-  $('ul.answer-list').on('focusout', 'li', function(){
-    var quiz_id = $('#question_quiz_id').val();
-    var question_id = $('#question_question_id').val();
-    var text = $(this).find('textarea').val();
-
-    // var correctAnswer = $("input:checked").parent().next().find("textarea").val();
-    // var currentAnswerIsCorrectAnswer = (text === correctAnswer);
-
-    var data = {answer: text}
-    console.log(data);
-    $.post('/quizzes/'+quiz_id+'/questions/'+question_id+'/answers', data)
-    return false;
-  });
+  $('ul.answer-list').on('focusout', 'li', answerCreateHandler);
 });
 
 
