@@ -125,6 +125,8 @@ GEM
       jwt (~> 0.1.4)
       multi_json (~> 1.0)
       rack (~> 1.2)
+    petroglyph (0.0.6)
+      tilt
     pg (0.15.1)
     polyglot (0.3.3)
     pry (0.9.12.2)
@@ -258,6 +260,7 @@ DEPENDENCIES
   hirb
   jquery-rails
   launchy
+  petroglyph
   pg
   pry
   rails (= 3.2.13)

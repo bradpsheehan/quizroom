@@ -14,6 +14,7 @@ gem 'thin'
 gem 'resque', '~> 1.24.1'
 gem 'delayed_job_active_record'
 gem 'acts_as_list'
+gem 'petroglyph'
 
 group :test do
   gem 'rspec-rails'
