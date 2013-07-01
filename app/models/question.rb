@@ -9,4 +9,10 @@ class Question < ActiveRecord::Base
 
   attr_accessible :question
 
+  acts_as_list scope: :quiz
+
+  def next
+    lower_item
+  end
+
 end

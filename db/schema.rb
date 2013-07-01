@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130629202324) do
+ActiveRecord::Schema.define(:version => 20130701155310) do
 
   create_table "answers", :force => true do |t|
     t.integer  "question_id"
@@ -59,20 +59,12 @@ ActiveRecord::Schema.define(:version => 20130629202324) do
 
   add_index "delayed_jobs", ["priority", "run_at"], :name => "delayed_jobs_priority"
 
-  create_table "messages", :force => true do |t|
-    t.text     "text"
-    t.integer  "user_id"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
-  end
-
-  add_index "messages", ["user_id"], :name => "index_messages_on_user_id"
-
   create_table "questions", :force => true do |t|
     t.integer  "quiz_id"
     t.text     "question"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
+    t.integer  "position"
   end
 
   create_table "quizzes", :force => true do |t|
