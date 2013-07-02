@@ -1,0 +1,46 @@
+.row
+  .main-content.large-9.cloumns
+    %h1
+      = @quiz.name
+      / @quiz.questions
+    .quiz-question
+      = form_for([@quiz, @question], html: {multipart: true}) do |f|
+        .field
+          %h4
+            Question
+          = f.text_area :question
+          =f.hidden_field :quiz_id, value: @quiz.id
+          =f.hidden_field :question_id, value: @question.id
+          %section.answers
+            .row
+              .large-2.columns
+                %h4
+                  Answers
+              .large-10.columns
+                .answer-radio-tagline
+                  (click button to side of text field to indicate the correct answer)
+            =f.fields_for :answer do |p|
+              %ul.answer-list
+                %li
+                  .field
+                    .row
+                      .large-1.columns.answer-radio
+                        = radio_button_tag :option1, ""
+                      .large-10.columns
+                        .ghost-answer
+                          %a{href: "#"} Add Answer
+                      .large-1.columns
+        %hr
+        =f.submit "Add Another Question", class: "custom-button-small pull-left"
+      / .actions
+      /   %a.custom-button-small.pull-left{href: "#"}
+      /     Add Another Question
+      .actions
+        %a.custom-button-small.pull-right{href: "#{new_classroom_path}"}
+          Save Quiz
+
+        / = submit_tag "save"
+
+
+
+

@@ -1,6 +1,7 @@
 class Student < User
 
   has_and_belongs_to_many :classrooms
+  has_many :submissions
 
   def self.find_or_create_students(student_emails)
     emails = split_emails(student_emails)

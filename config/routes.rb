@@ -3,11 +3,16 @@ Quizroom::Application.routes.draw do
 
   resources :users
   resources :sessions
+  resources :submissions, only: [:create, :show]
   resources :classrooms do
     resources :students
     resources :chats
   end
-  resources :quizzes
+  resources :quizzes do
+    resources :questions do
+      resources :answers
+    end
+  end
 
   get 'signup' => 'users#new'
   get 'login' => 'sessions#new', as: 'login'
@@ -15,5 +20,5 @@ Quizroom::Application.routes.draw do
   get 'logout' => 'sessions#destroy', as: 'logout'
   get 'add_students' => 'students#new'
   post 'start_quiz' => 'chats#create'
-
+  post 'submit_answer' => 'submissions#create'
 end

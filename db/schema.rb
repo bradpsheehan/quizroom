@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130622223748) do
+ActiveRecord::Schema.define(:version => 20130701155310) do
 
   create_table "answers", :force => true do |t|
     t.integer  "question_id"
@@ -28,6 +28,7 @@ ActiveRecord::Schema.define(:version => 20130622223748) do
     t.datetime "created_at",      :null => false
     t.datetime "updated_at",      :null => false
     t.integer  "classroom_name"
+    t.integer  "quiz_id"
   end
 
   create_table "classrooms", :force => true do |t|
@@ -63,14 +64,25 @@ ActiveRecord::Schema.define(:version => 20130622223748) do
     t.text     "question"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
+    t.integer  "position"
   end
 
   create_table "quizzes", :force => true do |t|
-    t.integer  "classroom_id"
+    t.integer  "teacher_id"
     t.string   "name"
-    t.datetime "created_at",   :null => false
-    t.datetime "updated_at",   :null => false
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
+
+  create_table "submissions", :force => true do |t|
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+    t.integer  "student_id"
+    t.integer  "answer_id"
+  end
+
+  add_index "submissions", ["answer_id"], :name => "index_submissions_on_answer_id"
+  add_index "submissions", ["student_id"], :name => "index_submissions_on_student_id"
 
   create_table "users", :force => true do |t|
     t.string   "email"

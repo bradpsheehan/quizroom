@@ -1,0 +1,18 @@
+%h1
+  =@quiz.name
+
+= link_to "Start", "#", {id: "start-question", class: "button"}
+
+%section.question
+  %h2#question-title
+
+  %h3 Possible Answers:
+  %ul#possible-answers
+
+  %h3 Student Answers:
+  %ul#chat{ data: { "teacher-channel" => @chat.teacher_channel, "public-channel" => @chat.public_channel} }
+    %li.no-answer Noone has submitted an answer.
+
+  = link_to "Next Question", "#", {id: "next-question", class: "button"}
+= button_to "Close Classroom", classroom_chat_path(@chat.classroom_id, @chat), {method: :delete}
+= render 'teacher_web_socket'

@@ -1,0 +1,77 @@
+= content_for :extra_scripts do
+  = javascript_include_tag "http://localhost:9292/faye.js"
+  = javascript_include_tag "socket"
+
+  :javascript
+    $(document).ready( function() {
+      $("section.question").hide();
+
+      var socket = Socket('http://localhost:9292/faye');
+      var publicChannel = $('#chat').data("public-channel");
+      var publishChannel = $("#publish_channel").val();
+
+      socket.subscribe("/#{@chat.public_channel}", function(data) {
+        var question = '';
+        var nextQuestion;
+
+        if(data.isQuestion) {
+          $("section.question").show();
+          question = data.question;
+
+          console.log(data, "whatwhatwhat");
+
+          nextQuestion = data.nextQuestion
+          $("h2#question-title").text(question.question);
+
+          var answersLength = data.answers.length;
+          var answerList = $("ul#possible-answers");
+          answerList.children().remove();
+
+          for(var i = 0; i < answersLength; i++) {
+            var currentAnswer = data.answers[i];
+
+            if(currentAnswer.correctAnswer){
+              answerList.append("<li class='correct_answer'>"+ currentAnswer.answer+"</li>");
+            } else {
+              answerList.append("<li>"+currentAnswer.answer+"</li>");
+            }
+          }
+
+          if(nextQuestion){
+            $('#next-question').attr('href', nextQuestion);
+          } else {
+            $('#next-question').remove();
+          }
+
+        } else {
+          $('.no-answer').remove();
+          $("#chat").append("<li>"+data.sender+": "+data.answer.text+"</li>");
+        }
+      });
+
+      $('#next-question').on('click', function() {
+
+
+        var nextQuestionPath =  $('#next-question').attr('href');
+        getQuestion(nextQuestionPath);
+        return false;
+
+      });
+
+      var getQuestion = function(question_path) {
+        console.log("getting the question at: "+question_path);
+        //get the first question
+        $.get(question_path, function(data) {
+          data.isQuestion = true;
+          socket.publish("/#{@chat.public_channel}",data);
+        });
+        return false;
+      }
+
+      $('#start-question').on('click', function() {
+        getQuestion("#{quiz_question_path(@quiz, @quiz.questions.first)}");
+        $(this).remove();
+      });
+
+    });
+
