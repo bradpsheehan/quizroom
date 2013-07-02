@@ -1,5 +1,10 @@
-$.put = function(){
-
+$.put = function(url, data, successCallback){
+  $.ajax({
+    type: "PUT",
+    url: url,
+    data: data,
+    success: successCallback || function(){}
+  });
 };
 
 // use this method after the question has been created
@@ -13,17 +18,17 @@ var questionUpdateHandler = function(event){
   console.log(event);
   // debugger;
   var correct_answer_id = $(event.target)
-                                  .parent()
-                                  .parent()
-                                  .find('textarea')
-                                  .attr('id');
+    .parent()
+    .parent()
+    .find('textarea')
+    .attr('id');
   var question_id = $('#question_question_id').val();
   var quiz_id = $('#question_quiz_id').val();
 
   var data = {question: {correct_answer_id: correct_answer_id}};
-  // $.post('/quizzes/'+quiz_id+'/questions/'+question_id, data, function(){
-  //   console.log("updated!")
-  // });
+  var url= '/quizzes/'+quiz_id+'/questions/'+question_id;
+  var callback = function(){console.log('success! maybe..')};
+  $.put(url, data, callback);
 };
 
 var answerCreateHandler = function(){
@@ -31,11 +36,15 @@ var answerCreateHandler = function(){
   var question_id = $('#question_question_id').val();
   var text_area = $(this).find('textarea');
   var text = $(this).find('textarea').val();
-  var data = {answer: text}
-  console.log(data);
-  $.post('/quizzes/'+quiz_id+'/questions/'+question_id+'/answers', data, function(data){
-    text_area.attr('id', data.id);
-  });
+  var data = {answer: text};
+  var answer_id = text_area.attr('id');
+  if(answer_id){
+    $.put('/quizzes/'+quiz_id+'/questions/'+question_id+'/answers/'+answer_id, data);
+  } else {
+    $.post('/quizzes/'+quiz_id+'/questions/'+question_id+'/answers', data, function(data){
+      text_area.attr('id', data.id);
+    });
+  }
   return false;
 };
 
@@ -44,7 +53,7 @@ $(document).ready( function(){
   // addNewAnswer($('.answer-list'), answer_num);
   answer_num++;
 
-  $('.ghost-answer').on('click', function(){
+  $('body').on('click', '.ghost-answer',function(){
     addNewAnswer($(this).closest('li'), answer_num);
     answer_num++;
     return false;
@@ -61,11 +70,16 @@ $(document).ready( function(){
 
   $('ul.answer-list').on('click', 'input[type="radio"]', questionUpdateHandler);
 
-  $('#question_question').on('focusout', function(){
+  $('body').on('focusout', '#question_question',function(){
     var quiz_id = $('#question_quiz_id').val();
     var question = $('#question_question').val();
     var data = {quiz_id: quiz_id, question: {question: question}}
-    $.post('/quizzes/'+quiz_id+'/questions', data, succesfulQuestionCreateHandler);
+    var question_id = $('#question_question_id').val();
+    if(question_id){
+      $.put('/quizzes/'+quiz_id+'/questions/'+question_id, data, function(){console.log("updated question")});
+    } else {
+      $.post('/quizzes/'+quiz_id+'/questions', data, succesfulQuestionCreateHandler);
+    }
   });
 
   $('#question_question').on('focusout', function(){
@@ -78,8 +92,6 @@ $(document).ready( function(){
 
 
 var addNewAnswer = function(parent, i){
-  // console.log('add another answer');
-
   var thingToAppend = "<li> \
                         <div class=\"field\"> \
                           <div class=\"row\"> \
@@ -97,9 +109,18 @@ var addNewAnswer = function(parent, i){
                           </div> \
                         </div> \
                       </li>";
-
   parent.children(':last').before(thingToAppend);
 };
+
+var addQuestion = function(){
+  var questionTemplate = $('.template').text();
+  var data = {quiz_id: 1}
+  var html = templateBuilder(questionTemplate, data);
+  $('.quiz-question').last().after(html);
+}
+
+$('#add-question-link').on('click', addQuestion);
+
 
 var removeAnswer = function(thingToRemove){
   // console.log('remove this answer')
