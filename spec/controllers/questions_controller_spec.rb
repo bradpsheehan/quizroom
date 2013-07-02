@@ -9,7 +9,6 @@ describe QuestionsController do
       question2 = create_question("Another question", quiz)
       get :show, quiz_id: quiz.id, id: question.id, format: :json
       json = JSON.parse(response.body).with_indifferent_access
-
       expect(json[:nextQuestion]).to eq(quiz_question_path(quiz, question2))
     end
   end
