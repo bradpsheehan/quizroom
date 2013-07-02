@@ -1,7 +1,7 @@
 .row
   .large-11.columns
-    / -if current_user.teacher?
-    /   %p Welcome teacher!
-    / -else
-    /   %p Welcome student!
+    -if current_user.teacher?
+      %h2 Welcome #{current_user.full_name}!
+    -else
+      %h2 Welcome #{current_user.first_name}!
 
