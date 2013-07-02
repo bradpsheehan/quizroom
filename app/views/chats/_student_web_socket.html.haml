@@ -34,8 +34,9 @@
             currentAnswer = data.answers[i];
             templateData = { id: currentAnswer.id, text: currentAnswer.answer };
             answerForm.prepend(templateBuilder(questionTemplate, templateData));
+            console.log("inside the for loop");
           }
-          answerForm.children("input[type='submit']").show().attr("disabled", true);
+          //answerForm.children("input[type='submit']").show().attr("disabled", true);
           answerForm.append("<input class='button' type='submit' name='commit' value='Submit' disabled='disabled'>");
 
         };
@@ -56,12 +57,16 @@
       $('section.question').hide();
 
       socket.subscribe("/#{@chat.public_channel}", function(data) {
+        console.log("what's happening?");
         if(data.isQuestion) {
+          $('p.selected_answer').text("");          
+          console.log("inside if");
           var formBuilder = FormBuilder(data);
           $('section.question').show();
           formBuilder.updateForm($("form#answer"));
           formBuilder.updateTitle($("h2#question-title"));
         } else {
+          console.log("inside else");
           $('p.selected_answer').text(data.answer.text);
         }
       });
@@ -80,7 +85,8 @@
           answer_id: selectedAnswer
         };
 
-        $(this).children().remove();
+        $(this).find('input:not([type="submit"])').parent().remove();
+        $(this).find('input[type="submit"]').hide();
 
         data = {
           question: $("#message").val(),
