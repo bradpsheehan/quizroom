@@ -11,9 +11,9 @@
         .field
           %h4
             Question
-          = f.text_area :question
-          =f.hidden_field :quiz_id, value: @quiz.id
-          =f.hidden_field :question_id, value: @question.id
+          = f.text_area :question, class: "question"
+          = f.hidden_field :quiz_id, value: @quiz.id
+          = f.hidden_field :question_id, class: "question_id", value: @question.id
           %section.answers
             .row
               .large-2.columns
@@ -39,30 +39,30 @@
 
 %script.template{type: "text/x-handlebars-template"}
   .quiz-question
-  %hr
-    = form_tag("#") do
-      .field
-        %h4
-          Question
-        = text_area_tag :question
-        %input{type:'hidden', name:"quiz_id", value:"{{quiz_id}}"}
-        = hidden_field_tag :question_id
-        %section.answers
-          .row
-            .large-2.columns
-              %h4
-                Answers
-            .large-10.columns
-              .answer-radio-tagline
-                (click button to side of text field to indicate the correct answer)
-          %ul.answer-list
-            %li
-              .field
-                .row
-                  .large-1.columns.answer-radio
-                    = radio_button_tag :option1, ""
-                  .large-10.columns
-                    .ghost-answer
-                      %a{href: "#"} Add Answer
-                  .large-1.columns
+    %hr
+      = form_tag("#") do
+        .field
+          %h4
+            Question
+          = text_area_tag :question, "", class: "question"
+          %input{type:'hidden', name:"quiz_id", value:"{{quiz_id}}"}
+            = hidden_field_tag :question_id, "", class: "question_id"
+          %section.answers
+            .row
+              .large-2.columns
+                %h4
+                  Answers
+              .large-10.columns
+                .answer-radio-tagline
+                  (click button to side of text field to indicate the correct answer)
+            %ul.answer-list
+              %li
+                .field
+                  .row
+                    .large-1.columns.answer-radio
+                      = radio_button_tag :option1, ""
+                    .large-10.columns
+                      .ghost-answer
+                        %a{href: "#"} Add Answer
+                    .large-1.columns
 
