@@ -1199,3 +1199,20 @@ form {
   margin: 10px;
   color: whitesmoke;
 }
+#home-image {
+  left: 0;
+  right: 0;
+  opacity: 0.3;
+  position: absolute;
+  width: 100%;
+}
+#homepage-h2 {
+  z-index: 100;
+  position: absolute;
+  font-size: 50px;
+}
+.home-image{
+  height: 700px;
+  width: 1000px;
+  position: relative;
+}

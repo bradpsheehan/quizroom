@@ -23,7 +23,7 @@
 
   %body
     =render 'header_nav'
-    - if current_user || @disable_side_nav == false
+    - if current_user
       =render 'side_nav'
 
     -if flash[:notice]
