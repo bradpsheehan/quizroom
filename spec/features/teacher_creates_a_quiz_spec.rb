@@ -17,22 +17,36 @@ describe "teacher creates a quiz", js: true do
     visit classroom_path(classroom)
 
     fill_in 'quiz_name', :with => "English Final Exam"
-    click_button 'create quiz'
-    fill_in 'question', :with => "What is a noun?"
-    fill_in 'answer', :with => "Answer1a"
-    click_on "Add another answer"
-    fill_in 'answer', :with => "Answer1b"
+    click_button 'Create Quiz'
+    fill_in 'question_question', :with => "What is a noun?"
+    click_link 'Add Answer'
+    fill_in 'answers[answer2]', :with => "Answer1a"
+    click_link 'Add Answer'
+    fill_in 'answers[answer3]', :with => "Answer1b"
 
-    click_link "Add Another Question"
+    choose 'option1'
 
-    fill_in 'question', :with => "What is a adverb?"
-    fill_in 'answer', :with => "Answer1b"
-    click_link "Add another answer"
-    fill_in 'answer', :with => "Answer2b"
+    click_button "Add Another Question"
 
-    click_button "Save Quiz"
+    question = Questin.first
 
-    expect( page ).to have_content "English Final Exam was successfully created!"
+    within "#question_#{question.id}" do
+      expect(page).to have_content("What is a noun?")
+      expect(page).to have_content("Answer1b")
+
+      within '.correct-answer' do
+        expect(page).to have_content("Answer1a")
+      end
+    end
+
+    #fill_in 'question', :with => "What is a adverb?"
+    #fill_in 'answer', :with => "Answer1b"
+    #click_link "Add another answer"
+    #fill_in 'answer', :with => "Answer2b"
+
+    #click_button "Save Quiz"
+
+    #expect( page ).to have_content "English Final Exam was successfully created!"
 
 
 
