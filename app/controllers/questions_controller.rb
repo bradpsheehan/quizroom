@@ -12,7 +12,6 @@ class QuestionsController < ApplicationController
   def update
     @question = Question.find(params[:id])
     @question.update_attributes(params[:question])
-    binding.pry
     respond_with @question, location: quiz_question_path(@question.quiz_id, @question)
 
 

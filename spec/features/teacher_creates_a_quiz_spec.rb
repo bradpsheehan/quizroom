@@ -28,7 +28,7 @@ describe "teacher creates a quiz", js: true do
 
     click_button "Add Another Question"
 
-    question = Questin.first
+    question = Question.first
 
     within "#question_#{question.id}" do
       expect(page).to have_content("What is a noun?")
