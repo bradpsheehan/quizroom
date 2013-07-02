@@ -1,11 +1,12 @@
+$.put = function(){
+
+};
+
 // use this method after the question has been created
 var succesfulQuestionCreateHandler = function(data){
   console.log(data);
   $('#question_question_id').val(data.id);
 };
-
-// var successfulAnswerCreateHandler = function(data){
-// };
 
 //use this method to update the question
 var questionUpdateHandler = function(event){
@@ -23,13 +24,6 @@ var questionUpdateHandler = function(event){
   // $.post('/quizzes/'+quiz_id+'/questions/'+question_id, data, function(){
   //   console.log("updated!")
   // });
-  $.ajax({
-    type: "PUT",
-    url: '/quizzes/'+quiz_id+'/questions/'+question_id,
-    data: data,
-    success: function(){
-    console.log("updated!")}
-  });
 };
 
 var answerCreateHandler = function(){
