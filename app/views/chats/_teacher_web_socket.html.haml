@@ -12,11 +12,15 @@
 
       socket.subscribe("/#{@chat.public_channel}", function(data) {
         var question = '';
+        var nextQuestion;
 
         if(data.isQuestion) {
           $("section.question").show();
           question = data.question;
 
+          console.log(data, "whatwhatwhat");
+
+          nextQuestion = data.nextQuestion
           $("h2#question-title").text(question.question);
 
           var answersLength = data.answers.length;
@@ -33,8 +37,8 @@
             }
           }
 
-          if(question.nextQuestion){
-            $('#next-question').attr('href', question.nextQuestion);
+          if(nextQuestion){
+            $('#next-question').attr('href', nextQuestion);
           } else {
             $('#next-question').remove();
           }
@@ -47,28 +51,27 @@
 
       $('#next-question').on('click', function() {
 
-        socket.publish("/#{@chat.public_channel}", {
-          question: $("#message").val(),
-          isQuestion: true,
-          sender: "Question"
-        });
 
-        $("form")[0].reset();
+        var nextQuestionPath =  $('#next-question').attr('href');
+        getQuestion(nextQuestionPath);
         return false;
 
       });
 
-      $('#start-question').on('click', function() {
+      var getQuestion = function(question_path) {
+        console.log("getting the question at: "+question_path);
         //get the first question
-        $.get("#{quiz_question_path(@quiz, @quiz.questions.first)}", function(data) {
-          console.log(data);
+        $.get(question_path, function(data) {
           data.isQuestion = true;
           socket.publish("/#{@chat.public_channel}",data);
         });
-
-        $(this).remove();
-
         return false;
+      }
+
+      $('#start-question').on('click', function() {
+        getQuestion("#{quiz_question_path(@quiz, @quiz.questions.first)}");
+        $(this).remove();
       });
+
     });
 

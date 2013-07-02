@@ -11,7 +11,12 @@ class QuestionsController < ApplicationController
 
   def show
     @question = Question.find(params[:id])
-    response = { question: @question, answers: @question.answers }
+    next_question = @question.next
+    response = if next_question
+      {question: @question, answers: @question.answers, nextQuestion: quiz_question_path(next_question.quiz_id, next_question) }
+    else
+      {question: @question, answers: @question.answers}
+    end
     respond_with response
   end
 end

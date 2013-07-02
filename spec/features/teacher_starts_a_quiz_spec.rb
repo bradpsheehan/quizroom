@@ -5,6 +5,7 @@ describe "teacher posts a message", js: true do
   it "opens a chat with a quiz" do
     teacher = create_teacher
     quiz = create_quiz_with_question_and_answer(teacher)
+    create_question_with_answer("What goes 'bark'?", quiz)
     question = quiz.questions.first
     answer = question.answers.first
     classroom = create_classroom(teacher)
