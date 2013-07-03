@@ -1,6 +1,10 @@
 quizroom
 ========
 
+Service Architecture
+
+![Alt text](/app/assets/images/services_map.png)
+
 StartUp
 
 rackup faye.ru -s thin -E production
