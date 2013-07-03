@@ -57,7 +57,8 @@ module ObjectCreationMethods
     answer1 = Answer.create do |a|
       a.question = question
       a.answer = answer
-      a.correct_answer = correct_answer
     end
+    question.correct_answer_id = answer1.id
+    answer1
   end
 end
