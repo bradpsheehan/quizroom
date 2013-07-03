@@ -12,7 +12,7 @@ class QuizzesController < ApplicationController
   end
 
   def create
-    @quiz = Quiz.create(teacher_id: params[:teacher_id], name: params[:quiz_name])
+    @quiz = Quiz.create(teacher_id: current_user.id, name: params[:quiz_name])
     redirect_to edit_quiz_path(id: @quiz.id)
   end
 end

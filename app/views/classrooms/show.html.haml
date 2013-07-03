@@ -21,6 +21,16 @@
           .large-3.columns
             .actions
               = submit_tag "Add Students", class: "custom-button-small add-students-btn pull-right"
+      .row
+        .large-12.columns
+          - @classroom.students.each do |student|
+            .pull-left
+              .circle
+              %br
+                - if student.first_name
+                  = student.full_name
+                - else
+                  = student.email
       .dashborad-widget-header
         .header-text
           %h2

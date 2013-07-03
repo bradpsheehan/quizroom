@@ -36,7 +36,7 @@
                       .large-1.columns
     %hr
     %a.custom-button-small.pull-left#add-question-link{href: "#"} Add Another Question
-    %a.custom-button-small.pull-right{href: "#{new_classroom_path}"} Save Quiz
+    %a.custom-button-small.pull-right{href: "#{user_path(current_user)}"} Save Quiz
 
 %script.template{type: "text/x-handlebars-template"}
   .quiz-question
