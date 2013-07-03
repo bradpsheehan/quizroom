@@ -21,7 +21,6 @@ function getQuestionId(container) {
 }
 
 var questionUpdateHandler = function(event){
-  //console.log(event);
   var correct_answer_id = $(event.target)
     .parent()
     .parent()
@@ -43,17 +42,12 @@ var answerCreateHandler = function() {
   var text = $this.val();
   var data = {answer: text};
   var answer_id = $this.attr('id');
-  console.log("saving answer '" + text + "', id: " + answer_id);
 
   if(answer_id){
     var url = '/quizzes/'+quiz_id+'/questions/'+question_id+'/answers/'+answer_id;
-    //console.log("----");
-    //console.log("putting to " + url);
     $.put(url, data);
   } else {
     var url = '/quizzes/'+quiz_id+'/questions/'+question_id+'/answers';
-    //console.log("====");
-    //console.log("posting to " + url);
     $.post(url, data, function(data) {
       $this.attr('id', data.id);
     });
@@ -89,7 +83,6 @@ $(document).ready( function(){
     if(question_id){
       var url = '/quizzes/'+quiz_id+'/questions/'+question_id;
       $.put(url, data, function(data) {
-        console.log("updated question")
       });
     } else {
       $.post('/quizzes/'+quiz_id+'/questions', data, function(data) {
@@ -98,11 +91,8 @@ $(document).ready( function(){
     }
   });
 
-
-
   $(document).on('focusout', 'textarea.answer', answerCreateHandler);
 });
-
 
 var addNewAnswer = function(parent, i){
   var thingToAppend = "<li> \
@@ -134,16 +124,12 @@ var addQuestion = function(){
 
 $('#add-question-link').on('click', addQuestion);
 
-
 var removeAnswer = function(event){
-  console.log('remove this answer');
   var liToRemove = $(this).closest('li');
-  console.log(liToRemove);
   var id = liToRemove.find('textarea').attr('id');
   
   var quiz_id = $('#question_quiz_id').val();
   var question_id = getQuestionId($(this).parents('.quiz-question'));
-
 
   $.delete("/quizzes/"+quiz_id+"/questions/"+question_id+"/answers/"+id);
   
