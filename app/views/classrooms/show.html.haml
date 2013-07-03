@@ -8,21 +8,9 @@
         .large-3.columns.header-text
           %h2
             Students
-        %form.search-bar{:action => "/students", :method => "get"}
-          .large-6.columns
-            %input.student-search-input{:autocomplete => "off", "data-provide" => "typeahead", "data-source" => @search_terms, :name => "q", :onwebkitspeechchange => "onChange()", :placeholder => "search for students", :type => "text", "x-webkit-speech" => ""}/
-          .large-3.columns
-          %button.custom-button-small{:name => "Search", :type => "submit"} Find
       .row
         .large-12.columns
-          .circle
-          .circle
-          .circle
-          .circle
-          .circle
-          .circle
-          .circle
-          .circle
+          %br
       = form_tag classroom_students_path(@classroom.id) do
         .row
           .large-9.columns
@@ -59,6 +47,6 @@
           %h2
             Class Stats
         .large-12.columns
-          =image_tag "charts_screen_shot.png"
+          %h3 Coming Soon!
     -else
       Your instructor has not posted a quiz yet.  Hang tight!
