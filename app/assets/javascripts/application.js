@@ -13,7 +13,7 @@
 //= require jquery
 //= require jquery_ujs
 //= require quiz_creator
-//= require foundation
+//= require foundation/app
 //= require sessions
 
 $(document).foundation();
