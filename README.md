@@ -3,7 +3,7 @@ quizroom
 
 Service Architecture
 
-![Alt text](/app/assets/images/services_map.png)
+![Alt text](/app/assets/images/service_map.png)
 
 StartUp
 
