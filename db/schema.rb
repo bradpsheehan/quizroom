@@ -16,9 +16,8 @@ ActiveRecord::Schema.define(:version => 20130701155310) do
   create_table "answers", :force => true do |t|
     t.integer  "question_id"
     t.text     "answer"
-    t.boolean  "correct_answer", :default => false
-    t.datetime "created_at",                        :null => false
-    t.datetime "updated_at",                        :null => false
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
   end
 
   create_table "chats", :force => true do |t|
@@ -62,8 +61,9 @@ ActiveRecord::Schema.define(:version => 20130701155310) do
   create_table "questions", :force => true do |t|
     t.integer  "quiz_id"
     t.text     "question"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at",        :null => false
+    t.datetime "updated_at",        :null => false
+    t.integer  "correct_answer_id"
     t.integer  "position"
   end
 

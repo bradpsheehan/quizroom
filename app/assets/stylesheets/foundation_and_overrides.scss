@@ -1159,9 +1159,11 @@ ul.answer-list {
   width: 75px;
   height: 75px;
   margin: 1em auto;
-  background-size: cover;
+  background: url("person_placeholder.png");
+  background-size: 150%;
   background-repeat: no-repeat;
-  background-position: center center;
+  background-color: #FFFFFF;
+  background-position: center top;
   -webkit-border-radius: 99em;
   -moz-border-radius: 99em;
   border-radius: 99em;

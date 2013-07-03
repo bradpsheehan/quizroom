@@ -12,7 +12,6 @@
 //
 //= require jquery
 //= require jquery_ujs
-//= require quiz_creator
 //= require foundation
 //= require sessions
 
